@@ -5,6 +5,8 @@
     <title></title>
   </head>
   <body>
+    <h1 align="middle"><b> STUDENT ADMISSION PAGE</b>  </h1>
+
     <?php
     	$userid="";
     	$err_userid="";
@@ -26,12 +28,55 @@
     	$err_year="";
     	$hobbies=[];
     	$err_hobbies="";
-    	$bio="";
-    	$err_bio="";
+    	$blood=[];
+    	$err_blood="";
+      $religion=[];
+      $err_religion="";
+      $payment="";
+      $err_payment="";
+      $address="";
+      $err_address="";
+      $cer=[];
+      $err_cer="";
+
 
     	$hasError=false;
 
     	$array= array("Jaunary","February","March","April","May","June", "July" ,"August","September","Octobar","November","December");
+      $array2= array("A+","A-","B+","B-","O+","O-", "AB+" ,"AB-");
+      $array3 = array("Muslim","Hindu","Christain", "Buddist","Others");
+
+      $array4= array("JSC","SSC","HSC");
+
+  	function cerExist($cer){
+  		global $cer;
+  		foreach($cer as $c){
+  			if($c == $cer) return true;
+  		}
+  		return false;
+  	}
+
+
+      function regilionExist($religion)
+      {
+        global $religion;
+        foreach ($religion as $r) {
+          if($r == $religion) return true;
+        }
+        return false;
+
+      }
+
+
+      function bloodExist($blood)
+      {
+        global $blood;
+        foreach ($blood as $b) {
+          if($b == $hobbies) return true;
+        }
+        return false;
+
+      }
 
     	function hobbyExist($hobby){
     		global $hobbies;
@@ -197,8 +242,6 @@
     			echo "<h1>Form submitted</h1>";
     			echo $_POST["userid"]."<br>";
     			echo $_POST["name"]."<br>";
-    			echo $_POST["password"]."<br>";
-          echo $_POST["password"]."<br>";
           echo $_POST["email"]."<br>";
           echo $_POST["phone"]."<br>";
     			echo $_POST["gender"]."<br>";
@@ -239,20 +282,104 @@
   					<td><span> <?php echo $err_userid;?> </span></td>
   				</tr>
   				<tr>
-  					<td>name</td>
-  					<td>: <input type="text" name="name" value="<?php echo $name;?>" placeholder="Username">  </td>
+  					<td>Name</td>
+  					<td>: <input type="text" name="name" value="<?php echo $name;?>" placeholder="Your Name........">  </td>
   					<td><span> <?php echo $err_name;?> </span></td>
   				</tr>
-  				<tr>
-  					<td>Password</td>
-  					<td>: <input type="password" name="password" placeholder="Password">  </td>
-  					<td><span> <?php echo $err_password;?> </span></td>
-  				</tr>
-  				<tr>
+          <tr>
+            <td>Email</td>
+            <td>: <input type="text" name="email" value="<?php echo $email;?>" placeholder="Your Email........">  </td>
+            <td><span> <?php echo $err_email;?> </span></td>
+          </tr>
+
   					<td>Gender</td>
   					<td>: <input type="radio" value="Male" <?php if($gender=="Male") echo "checked"; ?> name="gender"> Male <input name="gender" <?php if($gender=="Female") echo "checked"; ?> value="Female" type="radio"> Female </td>
   					<td><span> <?php echo $err_gender;?> </span></td>
   				</tr>
+          <tr>
+            <td>Blood Group :</td>
+            <td>: <select name="blood"><option disabled selected>---select---</option>
+              <?php
+          foreach($array2 as $k)
+          {
+
+            echo "<option> $k </option>";
+
+
+          }
+          ?>
+            </select>
+            </tr>
+
+            <tr>
+            <td>Date of Birth</td>
+  					<td>: <select name="date"><option disabled selected>---Date---</option>
+              <?php
+          for($i=1; $i<=31; $i++)
+          {
+
+            echo "<option> $i </option>";
+
+
+          }
+          ?>
+            </select>
+
+              <select name="Month"> <option disabled selected>---Month---</option>
+                <?php
+    							foreach($array as $p){
+    									echo "<option selected>$p</option>";
+
+    							}
+    						?>
+              </select>
+               <select name="year">
+                <option disabled selected>---year---</option>
+                <?php
+        for($j=1920; $j<=2010; $j++)
+        {
+          echo "<option> $j </option>";
+        }
+        ?>
+
+  						</select>
+  					</td>
+  					<td><span> <?php echo $err_dating;?></span>
+              <span><?php echo $err_Month;?></span>
+                <span><?php echo $err_year;?> </span></td>
+  				</tr>
+
+            <tr>
+              <td>Religion :</td>
+              <td>: <select name="religion"><option disabled selected>---select---</option>
+                <?php
+            foreach($array3 as $l)
+            {
+
+              echo "<option> $l </option>";
+
+
+            }
+            ?>
+              </select>
+              </tr>
+
+
+          <tr>
+            <td>Nationality</td>
+            <td>: <input type="radio" value="gender" <?php if($gender=="Bangladeshi") echo "checked"; ?> name="gender"> Bangladeshi <input name="gender" <?php if($gender=="Forigner") echo "checked"; ?> value="Forigner" type="radio"> Foriger </td>
+            <td><span> <?php echo $err_gender;?> </span></td>
+          </tr>
+          <tr>
+            <td>Father's Name</td>
+            <td>: <input type="text" name="name" value="<?php echo $name;?>" placeholder="Your Name........">  </td>
+            <td><span> <?php echo $err_name;?> </span></td>
+          </tr>
+          <tr>
+            <td>Mother's Name</td>
+            <td>: <input type="text" name="name" value="<?php echo $name;?>" placeholder="Your Name........">  </td>
+            <td><span> <?php echo $err_name;?> </span></td>
+          </tr>
   				<tr>
             <td>Admission Date :</td>
             <td>: <select name="date"><option disabled selected>---Date---</option>
@@ -291,61 +418,93 @@
                 <span><?php echo $err_year;?> </span></td>
 
   				</tr>
+
           <tr>
-          <td>Date of Birth</td>
-					<td>: <select name="date"><option disabled selected>---Date---</option>
-            <?php
-        for($i=1; $i<=31; $i++)
-        {
 
-          echo "<option> $i </option>";
-
-
-        }
-        ?>
-          </select>
-
-            <select name="Month"> <option disabled selected>---Month---</option>
-              <?php
-  							foreach($array as $p){
-  									echo "<option selected>$p</option>";
-
-  							}
-  						?>
-            </select>
-             <select name="year">
-              <option disabled selected>---year---</option>
-              <?php
-      for($j=1920; $j<=2010; $j++)
+        <tr>
+        <td>Graduation Date </td>
+        <td>: <select name="date"><option disabled selected>---Date---</option>
+          <?php
+      for($i=1; $i<=31; $i++)
       {
-        echo "<option> $j </option>";
+
+        echo "<option> $i </option>";
+
+
       }
       ?>
+        </select>
 
-						</select>
-					</td>
-					<td><span> <?php echo $err_dating;?></span>
-            <span><?php echo $err_Month;?></span>
-              <span><?php echo $err_year;?> </span></td>
-				</tr>
+          <select name="Month"> <option disabled selected>---Month---</option>
+            <?php
+              foreach($array as $p){
+                  echo "<option selected>$p</option>";
 
+              }
+            ?>
+          </select>
+           <select name="year">
+            <option disabled selected>---year---</option>
+            <?php
+    for($j=1920; $j<=2010; $j++)
+    {
+      echo "<option> $j </option>";
+    }
+    ?>
 
-          <tr>
+          </select>
+        </td>
+        <td><span> <?php echo $err_dating;?></span>
+          <span><?php echo $err_Month;?></span>
+            <span><?php echo $err_year;?> </span></td>
+      </tr>
+
+<tr>
+  <td>Present Address </td>
+  <td>: <input type="text" name="address" value="<?php echo $address;?>" placeholder="Your address ...."> </td>
+  <td><span> <?php echo $err_address;?> </span></td>
+
+</tr>
+<tr>
+  <td>Parmanent Address </td>
+  <td>: <input type="text" name="address" value="<?php echo $address;?>" placeholder="Your address ...."> </td>
+  <td><span> <?php echo $err_address;?> </span></td>
+
+</tr>
+
+<tr>
+  <td>Payment Statues </td>
+  <td>: <input type="text" name="payment" value="<?php echo $payment;?>" placeholder="Amount ...."> </td>
+  <td><span> <?php echo $payment;?> </span></td>
+
+</tr>
+
+<tr>
 <td>Contact Number </td>
-<td><input type="text" name="phone"value="<?php echo $phone;?>" placeholder="Number...."> </td>
-<td><span> <?php echo $err_phone;?> </span></td>
+<td> : <input type="text" name="phone" value="<?php echo $phone;?>" placeholder="Number...."> </td>
+<td> <span> <?php echo $err_phone;?> </span></td>
 </tr>
+
+<tr>
+  <td>Certifate Provided</td>
+					<td>: <input type="checkbox" name="cer[]" <?php if(cerExist("Movies")) echo "checked";?> value="Movies"> JSC
+					<input type="checkbox" name="cer[]" <?php if(cerExist("Music")) echo "checked";?> value="Music"> HSC
+					<input type="checkbox" name="cer[]" <?php if(cerExist("Sports")) echo "checked";?> value="Sports">SSC
+					</td>
+					<td><span> <?php echo $err_cer;?> </span></td> </td>
 
 </tr>
 
-    <td colspan="2" align="right"><input type="submit" name="Insert" value="Submit"></td>
-    <td colspan="2" align="right">  <input type="submit" name="Next Page" value="reset"> <a href=""></a>    </td>
+<tr>
+
+    <td colspan="2" align="right"><input type="submit" name="submit" value="Submit"></td>
+    <td colspan="2" align="right">  <input type="reset" name="reset" value="Reset"></td>
   <td><a target="_blank" href="StudentDU.php">Go To Edit information page</a></td>
 
   </tr>
 	</table>
 
-    </table>
+
   </fieldset>
 
 
