@@ -17,10 +17,20 @@
       $err_subject="";
       $year="";
       $err_year="";
-    $hasError=false;
+      $hasError=false;
+
+
+
+
+
+
+
+
+
+
   ?>
 
-    <form class="" action="index.html" method="post">
+    <form method="post">
     <fieldset>
       <table>
 
@@ -57,7 +67,8 @@
 <tr>
       <td colspan="2" align="right"><input type="submit" name="submit" value="Submit"></td>
       <td colspan="2" align="right"> <input type="reset" name="reset" value="Reset"></td>
-      <td><a  href="PasswordC.php"> Password Change Page</a></td>
+      <td><a  href="PasswordC.php"> Password Change Page</a></td> <br> <br>
+      <a href="Studentlogin.php"> Go To First Page </a>
 
     </tr>
 

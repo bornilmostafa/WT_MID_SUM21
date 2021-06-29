@@ -2,7 +2,7 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title></title>
+    <title>Student Information Edit Page</title>
   </head>
   <body>
     <?php
@@ -238,7 +238,7 @@
     		if(!$hasError){
 
     			echo "<h1>Form submitted</h1>";
-    			echo $_POST["userid"]."<br>";
+    			echo $_POST["id"]."<br>";
     			echo $_POST["name"]."<br>";
           echo $_POST["email"]."<br>";
           echo $_POST["phone"]."<br>";
@@ -246,7 +246,8 @@
     			echo $_POST["date"]."<br>";
           echo $_POST["Month"]."<br>";
           echo $_POST["year"]."<br>";
-
+          echo  $_POST["address"]."<br>";
+          echo  $_POST["payment"]."<br>";
     			$arr = $_POST["hobbies"];
 
     			foreach($arr as $e){
@@ -267,11 +268,12 @@
 
 
 
+    <h1 align="middle"><b> STUDENT INFORMATION EDIT  PAGE</b>  </h1>
 
 
 
 
-  <form class="" action="index.html" method="post">
+  <form class="" action="" method="post">
   <fieldset>
     <table>
       <tr>
@@ -495,13 +497,16 @@
 
     <td colspan="2" align="right"><input type="submit" name="DELETE" value="DELETE"></td>
     <td colspan="2" align="right">  <input type="submit" name="UPDATE" value="UPDATE"></td>
-    <td><a target="_blank" href="Student.php">Go To First page</a></td>
+
   </tr>
 
-
+<tr>
+    <td><a href="Student.php">Go To First page</a></td>
+    <td><a href="AdminStudent.php">Go To Top page</a></td>
+</tr>
 	</table>
 
-    
+
   </fieldset>
 
 

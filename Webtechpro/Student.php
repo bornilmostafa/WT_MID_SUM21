@@ -12,6 +12,10 @@
     	$err_userid="";
     	$name="";
     	$err_name="";
+      $fname="";
+      $err_fname="";
+      $mname="";
+      $err_mname="";
     	$password="";
     	$err_password="";
       $email="";
@@ -38,7 +42,10 @@
       $err_address="";
       $cer=[];
       $err_cer="";
-
+      $nation="";
+      $err_nation="";
+      $paddress="";
+      $err_paddress="";
 
     	$hasError=false;
 
@@ -46,16 +53,14 @@
       $array2= array("A+","A-","B+","B-","O+","O-", "AB+" ,"AB-");
       $array3 = array("Muslim","Hindu","Christain", "Buddist","Others");
 
-      $array4= array("JSC","SSC","HSC");
 
-  	function cerExist($cer){
+      function cerExist($cer){
   		global $cer;
   		foreach($cer as $c){
   			if($c == $cer) return true;
   		}
   		return false;
   	}
-
 
       function regilionExist($religion)
       {
@@ -88,7 +93,24 @@
 
 
     	//if($_SERVER["REQUEST_METHOD"]=="POST"){
+
     	if(isset($_POST["submit"])){
+
+        //==========Student Id validation=============
+        if(empty($_POST["id"])){
+          $hasError = true;
+          $err_name="id Required";
+        }
+        else if(strpos($_POST["id"],'S')){
+          $hasError = true;
+          $err_name="Start with S";
+        }
+        else {
+                $userid= $_POST["id"];
+
+        }
+
+        //============Student Name Validation==================
     		if(empty($_POST["name"])){
     			$hasError = true;
     			$err_name="Name Required";
@@ -118,60 +140,22 @@
     	$username=$_POST["username"];
     }
 
-    			if(empty($_POST["password"]))
-          {
-            $hasError=true;
-    				$err_password="Password Required";
-          }
-          else if(isset($_POST[""])){
-    		       echo htmlspecialchars($_POST["pass"]);
-    		    }
-    			 else if(strlen($_POST["password"])<8){
-            $hasError=true;
-    				 $err_password="Password Must Be 8 Charachter Long";
-    		 }
-    			 else if(!strpos($_POST["password"],"#")){
-             $hasError=true;
-    			 $err_password="Password should contain special character";
-    		    }
-    		 else if(!strpos($_POST["password"],"1")){
-             $hasError=true;
-    			    $err_password="Password should contain Numeric values";
-    		   }
-    		   else if(!ctype_upper($_POST["password"])){
-              $hasError=true;
-    			     $err_password="Password should contain UpperCase values";
-    		    }
-    		     else if(!ctype_lower($_POST["password"])){
-               $hasError=true;
-    			    $err_password="Password should contain LowerCase values";
-    		     }
-    		   else if(strpos($_POST["password"]," ")){
-              $hasError=true;
-    			    $err_password="Password should not contain white space";
-    		    }
-    			 else{
-    				 $password=$_POST["password"];
-    			 }
-    #confirm strart
-    if(empty($_POST["Cpassword"]))
-    {
-    	$hasError = true;
-    	$err_Cpassword="Cofirm Password Required";
-    }
-    else if($_POST["password"]!=$_POST["Cpassword"])
-    {
-      $hasError = true;
-     $err_Cpassword="Password doesn't match";
-    }
-    else {
+//===============payment Validation
+if(empty($_POST["payment"]))
+{
+  $hasError = true;
+  $err_payment="Phone Required";
+}
+else if(!is_numeric($_POST["payment"])){
+  $hasError = true;
+  $err_payment="payment Required";
+}
+else {
 
-    	$Cpassword=$_POST["Cpassword"];
-    }
+  $payment=$_POST["payment"];
+}
 
-    #confirm end
-
-    #phone start
+//=================================
     if(empty($_POST["phone"]))
     {
     	$hasError = true;
@@ -189,17 +173,17 @@
 
     //address start
 
-     if (empty($_POST["email"])) {
-      $hasError=true;
-      $err_email = "Email is required";   }
-     elseif(strpos($_POST["email"],"@.")){
-              $hasError=true;
-    			     $err_email="Email must contain @ and .";
-    		     }
-
-    			 else {
-                     $email =$_POST["email"];
-                 }
+    if(empty($_POST["email"])){
+    $hasError = true;
+    $err_email="email Required";
+  }
+      else if(strpos($_POST["email"], '@') == false || strpos($_POST["email"], '.') == false){
+          $hasError = true;
+    $err_email="Email must contain @ character and . character";
+      }
+      else{
+          $email=$_POST["email"];
+      }
 
     		if(!isset($_POST["gender"])){
     			$hasError = true;
@@ -208,6 +192,15 @@
     		else{
     			$gender = $_POST["gender"];
     		}
+        if(!isset($_POST["Nationality"])){
+          $hasError = true;
+          $err_nation="Nationality Required";
+        }
+        else{
+          $nation = $_POST["Nationality"];
+        }
+
+
     		if(!isset($_POST["hobbies"])){
     			$hasError = true;
     			$err_hobbies="Checking Required";
@@ -237,28 +230,76 @@
           $year = $_POST["year"];
         }
 
+//Nationality
+if(empty($_POST["Nationality"])){
+$hasError = true;
+$err_nation="Nationality Required";
+}
+else {
+        $nation = $_POST["Nationality"];
+}
+
+
+
+//================Cer Validation==========
+if(!isset($_POST["cer"])){
+			$hasError = true;
+			$err_cer="wheres Required";
+		}
+		else{
+			$er = $_POST["cer"];
+		}
+
     		if(!$hasError){
 
     			echo "<h1>Form submitted</h1>";
-    			echo $_POST["userid"]."<br>";
+    			echo $_POST["id"]."<br>";
     			echo $_POST["name"]."<br>";
+          echo $_POST["fname"]."<br>";
+          echo $_POST["fname"]."<br>";
           echo $_POST["email"]."<br>";
           echo $_POST["phone"]."<br>";
     			echo $_POST["gender"]."<br>";
     			echo $_POST["date"]."<br>";
           echo $_POST["Month"]."<br>";
           echo $_POST["year"]."<br>";
+          echo $_POST["address"]."<br>";
+          echo $_POST["Paddress"]."<br>";
+          echo $_POST["Nationality"]."<br>";
+          echo $_POST["payment"]."<br>";
+          echo $_POST["Adate"]."<br>";
+          echo $_POST["AMonth"]."<br>";
+          echo $_POST["Ayear"]."<br>";
+           echo $_POST["Gdate"]."<br>";
+          echo $_POST["GMonth"]."<br>";
+          echo $_POST["Gyear"]."<br>";
+
+        $arr4 =  $_Post["cer"];
+        foreach($arr4 as $c){
+          echo "$c<br>";}
+
+
 
     			$arr = $_POST["hobbies"];
 
     			foreach($arr as $e){
-    				echo "$e<br>";
-    			}
-    		}
+    				echo "$e<br>";}
+
+
+      $arr2 = $_POST["blood"];
+      foreach($arr2 as $b){
+              echo "$b<br>";}
+
+
+      $arr3 = $_POST["religion"];
+        foreach($arr2 as $r){
+          echo "$r<br>";}
+}
 
     		//we will otherwise DB CRUD or authenticate
     		///header("Location: index.php");
-    	}
+
+    }
 
     ?>
 
@@ -273,7 +314,7 @@
 
 
 
-  <form class="" action="index.html" method="post">
+  <form  action="" method="post">
   <fieldset>
     <table>
       <tr>
@@ -367,22 +408,22 @@
 
           <tr>
             <td>Nationality</td>
-            <td>: <input type="radio" value="gender" <?php if($gender=="Bangladeshi") echo "checked"; ?> name="gender"> Bangladeshi <input name="gender" <?php if($gender=="Forigner") echo "checked"; ?> value="Forigner" type="radio"> Foriger </td>
-            <td><span> <?php echo $err_gender;?> </span></td>
+            <td>: <input type="radio" name="Nationality" <?php if($nation=="Bangladeshi") echo "checked"; ?> name="Nationality"> Bangladeshi <input name="Nationality" <?php if($nation=="Forigner") echo "checked"; ?> value="Forigner" type="radio"> Foriger </td>
+            <td><span> <?php echo $err_nation;?> </span></td>
           </tr>
           <tr>
             <td>Father's Name</td>
-            <td>: <input type="text" name="name" value="<?php echo $name;?>" placeholder="Your Name........">  </td>
-            <td><span> <?php echo $err_name;?> </span></td>
+            <td>: <input type="text" name="fname" value="<?php echo $fname;?>" placeholder="Fater's Name........">  </td>
+            <td><span> <?php echo $err_fname;?> </span></td>
           </tr>
           <tr>
             <td>Mother's Name</td>
-            <td>: <input type="text" name="name" value="<?php echo $name;?>" placeholder="Your Name........">  </td>
-            <td><span> <?php echo $err_name;?> </span></td>
+            <td>: <input type="text" name="mname" value="<?php echo $mname;?>" placeholder="Mother's Name........">  </td>
+            <td><span> <?php echo $err_mname;?> </span></td>
           </tr>
   				<tr>
             <td>Admission Date :</td>
-            <td>: <select name="date"><option disabled selected>---Date---</option>
+            <td>: <select name="Adate"><option disabled selected>---Date---</option>
               <?php
           for($i=1; $i<=31; $i++)
           {
@@ -394,7 +435,7 @@
           ?>
             </select>
 
-              <select name="Month"> <option disabled selected>---Month---</option>
+              <select name="AMonth"> <option disabled selected>---Month---</option>
                 <?php
                   foreach($array as $p){
                       echo "<option selected>$p</option>";
@@ -402,7 +443,7 @@
                   }
                 ?>
               </select>
-               <select name="year">
+               <select name="Ayear">
                 <option disabled selected>---year---</option>
                 <?php
         for($j=1920; $j<=2010; $j++)
@@ -423,7 +464,7 @@
 
         <tr>
         <td>Graduation Date </td>
-        <td>: <select name="date"><option disabled selected>---Date---</option>
+        <td>: <select name="Gdate"><option disabled selected>---Date---</option>
           <?php
       for($i=1; $i<=31; $i++)
       {
@@ -435,7 +476,7 @@
       ?>
         </select>
 
-          <select name="Month"> <option disabled selected>---Month---</option>
+          <select name="GMonth"> <option disabled selected>---Month---</option>
             <?php
               foreach($array as $p){
                   echo "<option selected>$p</option>";
@@ -443,7 +484,7 @@
               }
             ?>
           </select>
-           <select name="year">
+           <select name="Gyear">
             <option disabled selected>---year---</option>
             <?php
     for($j=1920; $j<=2010; $j++)
@@ -467,15 +508,15 @@
 </tr>
 <tr>
   <td>Parmanent Address </td>
-  <td>: <input type="text" name="address" value="<?php echo $address;?>" placeholder="Your address ...."> </td>
-  <td><span> <?php echo $err_address;?> </span></td>
+  <td>: <input type="text" name="Paddress" value="<?php echo $paddress;?>" placeholder="Your address ...."> </td>
+  <td><span> <?php echo $err_paddress;?> </span></td>
 
 </tr>
 
 <tr>
   <td>Payment Statues </td>
   <td>: <input type="text" name="payment" value="<?php echo $payment;?>" placeholder="Amount ...."> </td>
-  <td><span> <?php echo $payment;?> </span></td>
+  <td><span> <?php echo $err_payment;?> </span></td>
 
 </tr>
 
@@ -485,11 +526,14 @@
 <td> <span> <?php echo $err_phone;?> </span></td>
 </tr>
 
+
+
+
 <tr>
   <td>Certifate Provided</td>
-					<td>: <input type="checkbox" name="cer[]" <?php if(cerExist("Movies")) echo "checked";?> value="Movies"> JSC
-					<input type="checkbox" name="cer[]" <?php if(cerExist("Music")) echo "checked";?> value="Music"> HSC
-					<input type="checkbox" name="cer[]" <?php if(cerExist("Sports")) echo "checked";?> value="Sports">SSC
+					<td>: <input type="checkbox" name="cer[]" <?php if(cerExist("JSC")) echo "checked";?> value="JSC"> JSC
+					<input type="checkbox" name="cer[]" <?php if(cerExist("HSC")) echo "checked";?> value="HSC"> HSC
+					<input type="checkbox" name="cer[]" <?php if(cerExist("SSC")) echo "checked";?>value="SSC">SSC
 					</td>
 					<td><span> <?php echo $err_cer;?> </span></td> </td>
 
@@ -497,11 +541,16 @@
 
 <tr>
 
-    <td colspan="2" align="right"><input type="submit" name="submit" value="Submit"></td>
+    <td colspan="2" align="right"><input type="submit" name="submit" value="submit"></td>
     <td colspan="2" align="right">  <input type="reset" name="reset" value="Reset"></td>
-  <td><a target="_blank" href="StudentDU.php">Go To Edit information page</a></td>
+
 
   </tr>
+<tr>
+  <td><a  href="StudentDU.php">Go To Edit information page</a></td
+    <td><a href="AdminStudent.php">Go To Top page</a></td>
+</tr>
+
 	</table>
 
 
