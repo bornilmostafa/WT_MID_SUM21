@@ -16,6 +16,10 @@
               <h1> <b> Student Result Enroll </b> </h1>
 
             <?php
+
+
+
+
              $resultid="";
              $err_rsultid="";
              $subject="";
@@ -28,6 +32,10 @@
              $err_result="";
 
              $hasError=false;
+
+
+
+
 
 
 

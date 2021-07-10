@@ -19,6 +19,17 @@
       $err_year="";
       $hasError=false;
 
+      if(!$hasError){
+
+        echo "<h1>Form submitted</h1>";
+        echo $_POST["studentid"]."<br>";
+        echo $_POST["subject"]."<br>";
+        echo $_POST["class"]."<br>";
+        echo $_POST["year"]."<br>";
+      //we will otherwise DB CRUD or authenticate
+      ///header("Location: index.php");
+    }
+
 
 
 

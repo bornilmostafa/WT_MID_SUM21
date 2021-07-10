@@ -1,0 +1,66 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<td>Date of Birth</td>
+<td>: <select name="date"><option disabled selected>---Date---</option>
+  <?php
+for($i=1; $i<=31; $i++)
+{
+   if($dating==$i){
+     echo "<option selected>$i</option>";
+    }
+    else{
+echo "<option> $i </option>";
+}
+}
+?>
+</select>
+
+  <select name="Month"> <option disabled selected>---Month---</option>
+    <?php
+      foreach($array as $p){
+        if($Month==$p){
+          echo "<option selected>$p</option>";
+        }
+        else{
+          echo "<option selected>$p</option>";
+        }
+
+      }
+    ?>
+  </select>
+   <select name="year">
+    <option disabled selected>---year---</option>
+    <?php
+for($j=1920; $j<=2010; $j++)
+{
+if($year==$j){
+echo "<option selected> $j </option>";}
+else {
+echo "<option> $j </option>";
+}
+}
+?>
+
+  </select>
+</td>
+<td><span> <?php echo $err_dating;?></span>
+  <span><?php echo $err_Month;?></span>
+    <span><?php echo $err_year;?> </span></td>
+</tr>
