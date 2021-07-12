@@ -52,15 +52,17 @@ $err_email="Email must contain @ character and . character";
   }
 //===========================passowrd==========================
 if(empty($_POST["password"])){
-    $hasError = true;
-    $err_password="Password Required";
+  $hasError = true;
+  $err_password="Password Required";
+}
+else if(strlen($_POST["password"]) <= 7){
+  $hasError = true;
+  $err_password="Password must contain at least 8 character";   
+}
+else{
+    $password = $_POST["password"];
   }
-  else{
-
-     $password=$_POST["password"];
-
-  }
-
+  
 //===============================================================================================
 if(!$hasError)
 {
