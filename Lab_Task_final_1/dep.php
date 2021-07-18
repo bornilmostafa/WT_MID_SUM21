@@ -6,19 +6,28 @@
     <title>Document</title>
 </head>
 <body>
-    <h1 align="middle"> Departmnet Insertion </h1>
+  <?php
+include  "./Controllers/dep_con.php";
+?>
 
+    <h1 align="middle"> Departmnet Insertion </h1>
+<form action=""method="post">
   <tr>
 <td>Department Name :</td>
-<td><input type="text" name="id" value="<?php echo $id;?>" placeholder="Type User Name..........">  </td>
-<td><span> <?php echo $err_id;?> </span></td>
+<td><input type="text" name="name" value="<?php echo $name;?>" placeholder="Type Department Name..........">  </td>
+<td><span> <?php echo $err_name;?> </span></td>
 </tr>
 
 <tr>
- <td colspan="2" align="right"><input type="submit" name="log_in" value=" Open New Department"></td>
+  <br>
+ <td colspan="2" align="right"><input type="submit" name="add_in" value=" Open New Department"></td>
 
 </tr>
 
+
+
+</form>
+  
     
 </body>
 </html>

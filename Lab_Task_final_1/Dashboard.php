@@ -10,6 +10,10 @@
 <?php
     include  "./Controllers/adminControl.php";
     include "./Controllers/stud_con.php";
+    include "./Controllers/dep_con.php";
+     $department=getAlldep();
+     $student=getStudents();
+
      ?>
 
      <h1 align="middle" > Dash Board Page </h1>
@@ -45,9 +49,16 @@
 </tr>
 <tr>
 <td>Department Id :</td>
-<td><input type="text" name="dep_id" value="<?php echo $depId;?>"  placeholder="Type dpartment id........." ></td>
-<td><span> <?php echo $err_depId;?> </span></td>
-
+<td>
+			<select name="c_id" class="form-control">
+				<option selected disabled>Choose</option>
+				<?php
+					foreach($department as $c){
+						echo "<option value='".$c["c_id"]."'>".$c["name"]."</option>";
+					}
+				?>
+			</select>
+            </td>		
 </tr>
 
 

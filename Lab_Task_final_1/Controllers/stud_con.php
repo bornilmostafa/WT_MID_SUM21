@@ -64,26 +64,42 @@ require_once "Models/db_config.php";
           htmlspecialchars($cgpa = $_POST["cgpa"]);
           } 
 
-          $rs = insertStudent($name,$dob,$credit,$cgpa,$depId);
+          $rs = insertStudent($name,$dob,$credit,$cgpa,$_POST["c_id"]);
           if($rs === true){
               header("Location:studentadd.php");
           }
           $err_db = $rs;
         
     }
+   else if(isset($_POST["edit_stu"])){
+        $rs = editstudent($name,$dob,$credit,$cgpa,$depId,$id);
+        if($rs === true){
+            header("Location:studentadd.php");
+        }
+        $err_db = $rs;
+      
+  }
 
-    function insertStudent($name,$dob,$credit,$cgpa,$depId){
-		$query = "insert into student values (NULL, '$name','$dob','$credit','$cgpa','$depId')";
+
+    function insertStudent($name,$dob,$credit,$cgpa,$c_id){
+		$query = "insert into student values (NULL, '$name','$dob','$credit','$cgpa','$c_id')";
 		return execute($query);
 		
 	}
     
-    function getStdents(){
-		$query = "select * from students";
+  function getStudents(){
+		$query ="select p.*,c.name as 'c_name' from student p left join department c on p.dep_id = c.dep_id";
 		$rs = get($query);
-		return $rs[0];
+		return $rs;
 	}
-        
+
+  function editstudent($name,$dob,$credit,$cgpa,$depId,$id){
+		$query ="update student set Name='$name',Dob=$dob,Credit=$credit,Cgpa=$cgpa ,c_id=$depId where id = $id";
+		return execute($query);
+	}
+	
+
+
 
 ?>
 

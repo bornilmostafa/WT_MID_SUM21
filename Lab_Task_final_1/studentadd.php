@@ -8,10 +8,11 @@
 </head>
 <body>
 <?php
-    include  "./Controllers/adminControl.php";
+     include  "./Controllers/adminControl.php"; 
+    include "./Controllers/dep_con.php";  
     include  "./Controllers/stud_con.php";
 
-    $student = getStdents();
+    $student = getStudents();
      ?>
 
      <h1 align="middle" > Student Edit Inforamtion Page </h1>
@@ -19,12 +20,13 @@
      <table class="table table-striped">
 		<thead>
 			<th>Sl#</th>
-      <th>id </th>
-			<th> Name</th>
-			<th>DOB</th>
-			<th>Credit</th>
-			<th> CGPA</th>
-			<th>departmentid</th>
+             <th>id </th>
+			 <th> Name</th>
+			 <th>DOB</th>
+			 <th>Credit</th>
+			 <th> CGPA</th>
+			 <th>departmentid</th>
+			 <th>dep Name</th>
 			
 			
 		</thead>
@@ -33,13 +35,14 @@
 				$i = 1;
 				foreach($student as $s){
 					echo "<tr>";
-          echo "<td>$i</td>";
-						echo "<td>".$s["name"]."</td>";
-						echo "<td>".$p["dob"]."</p>";
-						echo "<td>".$p["credit"]."</p>";
-						echo "<td>".$p["cgpa"]."</p>";
-						echo "<td>".$p["depid"]."</p>";
-						echo '<td><a href="editproduct.php?id='.$p["id"].'" class="btn btn-success">Edit</a></td>';
+                           echo "<td>$i</td>";
+						echo "<td>".$s["Name"]."</td>";
+						echo "<td>".$s["Dob"]."</p>";
+						echo "<td>".$s["Credit"]."</p>";
+						echo "<td>".$s["Cgpa"]."</p>";
+						echo "<td>".$s["c_id"]."</p>";
+						echo "<td>".$s["c_name"]."</p>";
+						echo '<td><a href="edit_stud.php?id='.$s["Id"].'" class="btn btn-success">Edit</a></td>';
 						echo '<td><a class="btn btn-danger">Delete</td>';
 					echo "</tr>";
 					$i++;
