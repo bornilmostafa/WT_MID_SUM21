@@ -1,15 +1,22 @@
 <?php
-include "Model/db_config.php";
+  include "Model/db_config.php";
 
-$err_db="";
-$hasError=false;
 $name="";
 $err_name="";
+$uname="";
+$err_uname="";
+$email="";
+$err_email="";
+$password="";
+$err_password="";
+$err_db="";
 $hasError=false;
 
-if(isset($_POST["add_cata"])){
+
+if(isset($_POST["sign_up"])){
+
 //========================name=========================
-if(empty($_POST["name"])){
+  if(empty($_POST["name"])){
     $hasError = true;
     $err_name="Name Required";
   }
@@ -20,40 +27,94 @@ if(empty($_POST["name"])){
   else{
   htmlspecialchars($name = $_POST["name"]);
   }
-//==================================================
+//======================username========================
+if(empty($_POST["uname"])){
+  $hasError = true;
+  $err_uname="User Name Required";
+}
+else{
+htmlspecialchars($uname = $_POST["uname"]);
+}
+
+
+
+//========================email===========================
+if(empty($_POST["email"])){
+$hasError = true;
+$err_email="Email Required";
+}
+  else if(strpos($_POST["email"], '@') == false || strpos($_POST["email"], '.') == false){
+$hasError = true;
+$err_email="Email must contain @ character and . character";
+  }
+  else{
+      $email=$_POST["email"];
+  }
+//===========================passowrd==========================
+if(empty($_POST["password"])){
+  $hasError = true;
+  $err_password="Password Required";
+}
+else if(strlen($_POST["password"]) <= 7){
+  $hasError = true;
+  $err_password="Password must contain at least 8 character";   
+}
+else{
+    $password = $_POST["password"];
+  }
+  
 //===============================================================================================
 if(!$hasError)
 {
-  $rs=insert_Cata($name);
+  $rs=insertUser($name,$uname,$email,$password);
   if($rs==true)
   {
-    header("Location:ed_cata.php");
+    header("Location:login.php");
   }
 $err_db=$rs;
 }
+}
+
+
+else if(isset($_POST["log_in"])){
+//======================username========================
+  if(empty($_POST["uname"])){
+    $hasError = true;
+    $err_uname="User Name Required";
+  }
+  else{
+  htmlspecialchars($uname = $_POST["uname"]);
+  }
+  if(empty($_POST["password"])){
+    $hasError = true;
+    $err_password="Password Required";
+  }
+  else{
+$password = $_POST["password"];
+
+  }
+
+if(!$hasError)
+{
+  if(authenticUser($uname,$password))
+  {
+    header("Location:all_cata.php");
+
+  }
+ $err_db="Invalid User Name and Password";
+}
+
+}
+function insertUser($name,$uname,$email,$password){
+
+  $query="insert into signup values (NULL,'$name','$uname','$email','$password')";
+  return execute($query);
+}
+function authenticUser($uname,$password)
+{
+$query="select * from signup where username='$uname' and password='$password'";
+return get($query);
 
 }
 
-function insert_cata($name){
-
-    $query="insert into cata values (NULL,'$name')";
-    return execute($query);
-  }
-  function getallcata()
-  {
-  $query="select * from cata ";
-  return get($query);
-  
-  }
-
-  function getcata($id)
-  {
-  $query="select * from cata where id='$id'";
-  $rs=get($query);
-  return $rs[0];
-  }
-
-
-
-
-?>
+ ?>
