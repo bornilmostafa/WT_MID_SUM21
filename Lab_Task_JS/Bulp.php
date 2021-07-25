@@ -7,9 +7,11 @@
  <input type="password" placeholder="password">
 
 </form>
-<form id="g-form" style="display:none" action="">American International University-Bangladesh, commonly known by its acronym AIUB, is an accredited private university in Dhaka, Bangladesh. The university is an independent organization with own Board of Trustees.
+<button id="btn_g" onclick="viewGoogle()" >Login With Google</button>
+
+<form id="g-form" style="display:none" action="">
 <input type="text" placeholder="gmail"> <br/>
-<input type="password" placeholder="gamail">
+<input type="password" placeholder="gamail password">
 </form>
     
 <form action="">
@@ -20,8 +22,8 @@
 <br/>
 <span onmouseover="showinfo()" onmouseout="hideout()" ></span>
 <br/>
-<p id="info" style="display:none" >American International University-Bangladesh, commonly known by its acronym AIUB, is an accredited private university in Dhaka, Bangladesh. The university is an independent organization with own Board of Trustees. </p>
-<script src="myjs.js" ></script>
+<p id="info" style="display:none" >American International University-Bangladesh, commonly known by its acronym AIUB, is an accredited private university in Dhaka, Bangladesh. The university is an independent organization with own Board of Trustees.
+</p>
 </form>
 
 
