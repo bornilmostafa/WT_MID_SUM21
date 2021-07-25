@@ -64,7 +64,7 @@ require_once "Models/db_config.php";
           htmlspecialchars($cgpa = $_POST["cgpa"]);
           } 
 
-          $rs = insertStudent($name,$dob,$credit,$cgpa,$_POST["c_id"]);
+          $rs = insertStudent($name,$dob,$credit,$cgpa,$depId);
           if($rs === true){
               header("Location:studentadd.php");
           }
@@ -81,8 +81,8 @@ require_once "Models/db_config.php";
   }
 
 
-    function insertStudent($name,$dob,$credit,$cgpa,$c_id){
-		$query = "insert into student values (NULL, '$name','$dob','$credit','$cgpa','$c_id')";
+    function insertStudent($name,$dob,$credit,$cgpa,$depId){
+		$query = "insert into student values (NULL, '$name','$dob','$credit','$cgpa','$depId')";
 		return execute($query);
 		
 	}

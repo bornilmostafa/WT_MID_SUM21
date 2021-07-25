@@ -20,12 +20,10 @@
      <table class="table table-striped">
 		<thead>
 			<th>Sl#</th>
-             <th>id </th>
 			 <th> Name</th>
 			 <th>DOB</th>
 			 <th>Credit</th>
 			 <th> CGPA</th>
-			 <th>departmentid</th>
 			 <th>dep Name</th>
 			
 			
@@ -40,9 +38,8 @@
 						echo "<td>".$s["Dob"]."</p>";
 						echo "<td>".$s["Credit"]."</p>";
 						echo "<td>".$s["Cgpa"]."</p>";
-						echo "<td>".$s["c_id"]."</p>";
 						echo "<td>".$s["c_name"]."</p>";
-						echo '<td><a href="edit_stud.php?id='.$s["Id"].'" class="btn btn-success">Edit</a></td>';
+						echo '<td><a href="edit_stud.php?id='.$s["id"].'" class="btn btn-success">Edit</a></td>';
 						echo '<td><a class="btn btn-danger">Delete</td>';
 					echo "</tr>";
 					$i++;

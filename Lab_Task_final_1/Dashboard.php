@@ -50,11 +50,11 @@
 <tr>
 <td>Department Id :</td>
 <td>
-			<select name="c_id" class="form-control">
+			<select name="dep_id" class="form-control">
 				<option selected disabled>Choose</option>
 				<?php
 					foreach($department as $c){
-						echo "<option value='".$c["c_id"]."'>".$c["name"]."</option>";
+						echo "<option value='".$c["id"]."'>".$c["name"]."</option>";
 					}
 				?>
 			</select>
