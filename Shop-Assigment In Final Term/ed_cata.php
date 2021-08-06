@@ -10,6 +10,7 @@
    <?php
            include "./Cortroller/cata_control.php"; 
            $cat=getAllCategories();
+           $key="";
            $key= $_GET["key"];
            $products=SearchCata($key);
 

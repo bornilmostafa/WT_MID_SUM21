@@ -81,10 +81,9 @@
   </form>  
 
   <?php
-		
+ echo "<table>";			
 
-if(isset($_POST["enroll_year"])) {
-  echo "<table>";	 
+if(isset($_POST["enroll_year"])) {     
 echo "<tr>";
 echo "<td>S#NO1</td>";
 echo "<td>UserId</td>";
@@ -103,14 +102,11 @@ echo "</tr>";
             echo "<td>".$c["Email"]."</td>";
 						echo "<td>".$c["admissiondate"]."</td>";
 					echo "</tr>";
-    
 					$i++;
-        echo"</table>";
-        
 				}
       }
 			
-
+	echo"</table>";
 	?>
 
 

@@ -58,8 +58,6 @@ $err_mname="";
 
     $image = "";
     $error_img = "";
-    //========================errroR in database =============
-    $err_db="";
 
     $hasError=false;
 
@@ -145,7 +143,7 @@ $err_mname="Must be in <5 character";
 }
 else {
 
-htmlentities($mname=$_POST["mname"]);
+htmlentities($fname=$_POST["fname"]);
 }
 
 //=====================Gender============================
@@ -182,7 +180,7 @@ $hasError = true;
 $err_religion="religion Required";
 }
 else {
-htmlspecialchars($religion = $_POST["religion"]);
+htmlspecialchars($blood = $_POST["religion"]);
 }
 
 
@@ -286,7 +284,7 @@ htmlspecialchars($paddress=$_POST["Paddress"]);
 
 
 //==============================payment==============================
-/* if(empty($_POST["payment"]))
+if(empty($_POST["payment"]))
 {
   $hasError = true;
   $err_payment="Payment Required";
@@ -299,7 +297,7 @@ else {
 
 htmlspecialchars($payment=$_POST["payment"]);
 }
- */
+
 //====================phone===========================
 if(empty($_POST["phone"]))
 {
@@ -350,7 +348,7 @@ if(isset($_FILES['image'])){
         $ad_date = $Adating." ".$AMonth." ".$Ayear;
         $gd_date = $Gdating." ".$GMonth." ".$Gyear;
 
-          //echo "<h1>Form submitted</h1>";
+          echo "<h1>Form submitted</h1>";
           /* echo $_POST["id"]."<br>";
      			echo $_POST["name"]."<br>";
           echo $_POST["email"]."<br>";
@@ -380,9 +378,9 @@ if(isset($_FILES['image'])){
 				echo "$e<br>"; */
  
 
-$rs = insertStudent($userid,$name,$email,$gender,$birthday,$nation,$blood,$religion,$fname,$mname,$ad_date,$gd_date,$address,$paddress,$phone,$filename) ;
+$rs = insertStudent($userid,$name,$email,$gender,$birthday,$nation,$religion,$blood,$fname,$mname,$ad_date,$gd_date,$address,$paddress,$phone,$filename) ;
 		if($rs === true){
-			header("Location: StudentAdmitted.php");
+			header("Location: StudentDU.php");
 		}
 		$err_db = $rs;
 
@@ -391,34 +389,8 @@ $rs = insertStudent($userid,$name,$email,$gender,$birthday,$nation,$blood,$relig
 
 }
 
-//====================Student Search================================
-if(isset($_POST["teachersearch"])){
-  if(empty($_POST["id"])){
-      $err = true;
-      $err_userid = "Student ID Required";
-  }
 
-  else if(strpos($_POST["id"],'S')){
-    $hasError = true;
-    $err_userid="Start with S";
-  }
-      else{
-              $userid = $_POST["id"];
-          }
-      }
-     
-  
-
-
-if(isset($_POST["del_student"])){
-  $data = Studentdelete($id);
-  if($data === true){
-      header("Location: StudentAdmitted.php"); 
-  }
-}
-
-
-function insertStudent($userid,$name,$email,$gender,$birthday,$nation,$blood,$religion,$fname,$mname,$ad_date,$gd_date,$address,$paddress,$phone,$filename){
+function insertStudent($userid,$name,$email,$gender,$birthday,$nation,$religion,$blood,$fname,$mname,$ad_date,$gd_date,$address,$paddress,$phone,$filename){
   $query = "insert into student values(Null,'$userid','$name','$email','$gender','$birthday','$nation','$religion','$blood','$fname','$mname','$ad_date','$gd_date','$address','$paddress','$phone','$filename')";
   return execute($query);
 }
@@ -432,7 +404,7 @@ function getallStudent(){
 
   function Enrollinfo($ad_date){
 
-    $query = "SELECT id,userid,name,email,birthday,admissiondate FROM `student` WHERE admissiondate like '%$ad_date%'";
+    $query = "SELECT id,Name,Email,admissiondate FROM `student` WHERE admissiondate like '%$ad_date%'";
     $rs = get($query);
     return $rs;
 
@@ -441,39 +413,11 @@ function getallStudent(){
 
 function updateStudent($userid,$name,$email,$gender,$birthday,$nation,$religion,$blood,$fname,$mname,$ad_date,$gd_date,$address,$paddress,$phone,$filename){
   global $adminidforinfo;
-  $query = "update student set userid='$userid', name='$name', gender='$gender', birthday='$birthday', email='$email',nationality='$nation', religion='$religion', bloodgroup='$blood', fathername='$fname', mothername='$mname', admissondate='$ad_date',gradutiondate='$gd_date',presentaddress='$address',parmanentaddress='$paddress',contactnumber='$phone', img='$filename' where id=$userid";
+  $query = "update student set userid='$userid', name='$name', gender='$gender', birthday='$birthday', email='$email',nationality='nation', religion='$religion', bloodgroup='$blood', fathername='$fname', mothername='$mname', admissondate='$ad_date',gradutiondate='$gd_date',presentaddress='$address',parmanentaddress='$paddress',contactnumber='$phone', img='$filename' where id=$userid";
   return execute($query);
 }
 
 
-
-function getstudent($userid){
-  $query =  "select * from student inner join users on admin.userid = users.uname where users.id = $userid";
-  $data = get($query);
-  if(count($data) > 0){
-      return $data[0];
-  }
-  else{
-      return false;
-  }
-}
-function Studentdelete($id){
-  global $id;
-  $query = "DELETE FROM student WHERE id='$id'";
-  return execute($query);
-}
-
-
-function Studentforsearch($Studentidforsearch){
-  $query =  "select * from  student where id = $Studentidforsearch";
-  $data = get($query);
-  if(count($data) > 0){
-      return $data[0];
-  }
-  else{
-      return false;
-  }
-}
 
 
  ?>

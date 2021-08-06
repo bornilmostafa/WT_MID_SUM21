@@ -8,29 +8,8 @@
 
 
       ?>
-
   <script>
-      var hasError=false;
-      function get(id)
-      {
-        return document.getElementById(id);
-      }
-     function validate()
-     {
-       refresh();
-        if(get("name").value=="")
-        {
-          hasError = true;
-          get("err_name").innerHTML="*Name required";
-        }
-      return !hasError;
-     }
-
-
-      function refresh()
-      {
-        hasError=false;
-      }
+  
 
   </script>    
 
@@ -39,21 +18,21 @@
     <h1 align="middle"><b> STUDENT ADMISSION PAGE</b>  </h1>
 
 
-<form class="" onsubmit=" return validate()" action="" method="post" enctype="multipart/form-data">
+<form class="" onsubmit="validate()" action="" method="post" enctype="multipart/form-data">
 
 <table>
 
   <tr>
   <td>Id</td>
-  <td>: <input  type="text" name="id" value="<?php echo $userid;?>" placeholder="Your id ...."> </td>
+  <td>: <input type="text" name="id" value="<?php echo $userid;?>" placeholder="Your id ...."> </td>
   <td><span> <?php echo $err_userid;?> </span></td>
   </tr>
 
 
   <tr>
   <td>Name</td>
-  <td>: <input id="name" type="text" name="name" value="<?php echo $name;?>" placeholder="Your Name........">  </td>
-  <td><span id="err_name"> <?php echo $err_name;?> </span></td>
+  <td>: <input type="text" name="name" value="<?php echo $name;?>" placeholder="Your Name........">  </td>
+  <td><span> <?php echo $err_name;?> </span></td>
   </tr>
   <td>Email</td>
   <td>: <input type="text" name="email" value="<?php echo $email;?>" placeholder="Your Email........">  </td>
@@ -287,13 +266,13 @@ else {
 
   </tr>
 
- <!--  <tr>
+  <tr>
     <td>Payment Statues </td>
     <td>: <input type="text" name="payment" value="<?php echo $payment;?>" placeholder="Amount ...."> </td>
     <td><span> <?php echo $err_payment;?> </span></td>
 
   </tr>
- -->
+
   <tr>
   <td>Contact Number </td>
   <td> : <input type="text" name="phone" value="<?php echo $phone;?>" placeholder="Number...."> </td>
@@ -315,7 +294,5 @@ else {
 
       </table>
     </form>
-
-    <a href="StudentAdmitted.php">Go to check Page</a>
   </body>
 </html>

@@ -2,7 +2,7 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>Student Login Page</title>
+    <title>DASHBOARD</title>
   </head>
   <body>
          <h1> <b>WELCOME  STUDENT </b> </h1>
