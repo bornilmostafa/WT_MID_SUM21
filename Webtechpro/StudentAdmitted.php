@@ -11,7 +11,9 @@
 <?php
   
   require_once "Models/db_config.php";
+
   require_once "Controllers/studentControl.php";
+
   $ad_date="";
   $E_student=Enrollinfo($ad_date);
 
@@ -54,8 +56,7 @@
                         }
                         echo"</table>";
                        
-                     //echo   '<td><a href="StudentAdmitted.php?id= '.$c["userid"].'"  onclick="return Studentdelete()">Delete</a></td>';         
-                    // echo '<td colspan="2" align="right"><button type="submit" name="del_student" value="submit">Delete</button> </td>';
+                        
                     
         
             ?>

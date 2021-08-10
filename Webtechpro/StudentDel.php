@@ -12,6 +12,7 @@
      
       $id = $_GET["id"];
 	  $c = Studentdelete($id);
+      
    
 
 

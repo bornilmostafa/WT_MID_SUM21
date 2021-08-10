@@ -2,11 +2,6 @@
 
 require_once "Models/db_config.php";
 ////==============================Student Name Phone ===============================
-if(isset($_GET["id"]))
-{
-  $id=$_GET["id"];
-
-}
  $userid="";
  $err_userid="";
  $name="";
@@ -407,8 +402,7 @@ $rs = insertStudent($userid,$name,$email,$gender,$birthday,$nation,$blood,$relig
 
 //================================================================Student Info Update============================================================
 
- if(isset($_POST["ed_student"])){
-
+else if(isset($_POST["ed_student"])){
 
 
   ////========================================Student All info====================================
@@ -584,26 +578,6 @@ htmlspecialchars($phone=$_POST["phone"]);
     $ad_date = $Adating." ".$AMonth." ".$Ayear;
     $gd_date = $Gdating." ".$GMonth." ".$Gyear; */
 
-
-         // $id=$_GET["id"];
-          $userid=$_POST["userid"];
-     			$name=$_POST["name"];
-          $email=$_POST["email"];
-          $gender=$_POST["gender"];
-          $blood=$_POST["bloodgroup"];
-          $birthday=$_POST["birthday"];
-          $nation=$_POST["Nationality"];
-          $fname=$_POST["fname"];
-          $mname=$_POST["mname"];
-          $religion=$_POST["religion"];
-          $ad_date=$_POST["admissiondate"];
-          $gd_date=$_POST["graduationdate"];
-          $address=$_POST["address"];
-          $paddress=$_POST["Paddress"];
-          $phone=$_POST["phone"];
-         // $filename=$_POST["image"];
-          
-
 $rs = UpdateStudent($userid,$name,$email,$gender,$birthday,$nation,$blood,$religion,$fname,$mname,$ad_date,$gd_date,$address,$paddress,$phone,$filename);
 if($rs === true){
   header("Location: StudentUinfo.php");
@@ -692,7 +666,7 @@ function getallStudent(){
 
   function Enrollinfo($ad_date){
 
-    $query = "SELECT * FROM `student` WHERE admissiondate like '%$ad_date%'";
+    $query = "SELECT id,userid,name,email,birthday,admissiondate FROM `student` WHERE admissiondate like '%$ad_date%'";
     $rs = get($query);
     return $rs;
 
@@ -701,7 +675,7 @@ function getallStudent(){
 
 function updateStudent($userid,$name,$email,$gender,$birthday,$nation,$religion,$blood,$fname,$mname,$ad_date,$gd_date,$address,$paddress,$phone,$filename){
   global $id;
-  $query = "update student set userid='$userid', name='$name', email='$email', gender='$gender', birthday='$birthday', nationality='$nation', religion='$religion', bloodgroup='$blood', fathername='$fname', mothername='$mname', admissiondate='$ad_date',graduationdate='$gd_date',presentaddress='$address',parmanentaddress='$paddress',contactnumber='$phone', img='$filename' where id='$id' ";
+  $query = "update student set userid='$userid' name='$name', gender='$gender', birthday='$birthday', email='$email',nationality='$nation', religion='$religion', bloodgroup='$blood', fathername='$fname', mothername='$mname', admissondate='$ad_date',gradutiondate='$gd_date',presentaddress='$address',parmanentaddress='$paddress',contactnumber='$phone', img='$filename' where id='$id";
   return execute($query);
 }
 
@@ -732,80 +706,11 @@ function studentSearch($key){
 
 
 function StudentforUpdate($id){
-  $query = "select * from student where id = '$id'";
+  $query = "select * from student where id = $id";
   $rs = get($query);
   return $rs[0];
 
 }
-
-//============================Student MMontly and yearly Information===============================
-$admission_year="";
-
-$student_enrollment_month="";
-	$student_enrollment_year="";
-	$error_student_enrollment_month_year="";
-	
-
-	if(isset($_POST["student_enroll"])){	
-		if(!isset($_POST["Student_enroll_month"]) && !isset($_POST["Student_enroll_year"])){
-			$hasError =true;
-			$error_student_enrollment_month_year="Only year or month year required";
-		}
-        /* else if(isset($_POST["Student_enroll_month"]) && !isset($_POST["Student_enroll_year"])){
-			$hasError=true;
-			$error_student_enrollment_month_year="month and year required";
-		}
-		 */
-    else if(isset($_POST["Student_enroll_month"]) || isset($_POST["Student_enroll_year"])){
-			$student_enrollment_month=$_POST["Student_enroll_month"];
-			$student_enrollment_year=$_POST["Student_enroll_year"];
-		}
-        else if(isset($_POST["Student_enroll_year"])){
-			$student_enrollment_year=$_POST["Student_enroll_year"];
-		}
-    else if(isset($_POST["Student_enroll_month"])){
-			$student_enrollment_month=$_POST["Student_enroll_month"];
-		}
-		if(!$hasError){
-			setcookie("admission_year",$student_enrollment_year,time()+3600);
-      //setcookie("admission_year",$student_enrollment_month,time()+3600);
-			header("location:teacher_enrollment1.php");
-		}
-    if(!$hasError)
-    {
-      setcookie("admission_month",$student_enrollment_month,time()+3600);
-      header("location:student_enroll_2.php");
-    }
-
-
-	}
-
-
-	if(isset($_COOKIE["admission_year"])){
-		$admission_year=$_COOKIE["admission_year"];
-	}
-  //==============for month===========================================
-  if(isset($_COOKIE["admission_month"])){
-		$admission_year=$_COOKIE["admission_month"];
-	}
-
-
-
-
-	function join_year($admission_year){
-		$query="select id,userid,name,email,admissiondate from student where admissiondate like '%$admission_year%'";
-		$data=get($query);
-		return $data;
-	}
-
-  function getAllStudents(){
-    $query = "select * from student";
-    $rs = get($query);
-    return $rs;
-}
-
-
-//======================================================================================================
 
 
 function Enrollment($data){
@@ -816,7 +721,89 @@ function Enrollment($data){
   
   }
 
- 
+
+
+
 
 
  ?>
+
+
+
+//====================================================================================
+Eroroll query
+
+--------------------------------------------------------------
+
+
+$joining_year="";
+
+$student_enrollment_month="";
+	$student_enrollment_year="";
+	$error_student_enrollment_month_year="";
+	
+
+	if(isset($_POST["btn_teacher_enrollment"])){	
+		if(!isset($_POST["teacher_enrollment_month"]) && !isset($_POST["teacher_enrollment_year"])){
+			$error =true;
+			$error_student_enrollment_month_year="Only year or month year both required";
+		}
+        else if(isset($_POST["teacher_enrollment_month"]) && !isset($_POST["teacher_enrollment_year"])){
+			$error=true;
+			$error_student_enrollment_month_year="month and year required";
+		}
+		else if(isset($_POST["teacher_enrollment_month"]) && isset($_POST["teacher_enrollment_year"])){
+			$student_enrollment_month=$_POST["teacher_enrollment_month"];
+			$student_enrollment_year=$_POST["teacher_enrollment_year"];
+		}
+        else if(isset($_POST["teacher_enrollment_year"])){
+			$student_enrollment_year=$_POST["teacher_enrollment_year"];
+		}
+		if(!$error){
+			setcookie("joining_year",$student_enrollment_year,time()+3600);
+			header("location:teacher_enrollment1.php");
+		}
+	}
+
+
+	if(isset($_COOKIE["joining_year"])){
+		$joining_year=$_COOKIE["joining_year"];
+	}
+
+	function join_year($joining_year){
+		$query="select userid from student where admissiondate like '%$joining_year%'";
+		$data=get($query);
+		return $data;
+	}
+
+  function getAllStudents(){
+    $query = "select * from student";
+    $rs = get($query);
+    return $rs;
+}
+///==========================================================================================================================
+
+
+
+UPDATE student SET `userid`='',`name`='[value-3]',`email`='[value-4]',`gender`='[value-5]',`birthday`='[value-6]',`nationality`='[value-7]',`religion`='[value-8]',`bloodgroup`='[value-9]',`fathername`='[value-10]',`mothername`='[value-11]',`admissiondate`='[value-12]',`graduationdate`='[value-13]',`presentaddress`='[value-14]',`parmanentaddress`='[value-15]',`contactnumber`='[value-16]',`img`='[value-17]' WHERE `id`
+
+
+
+//=============================================Student enroll ============================
+
+
+<?php
+	require_once "Controllers/studentControl.php";
+
+	$ad=join_year($admission_year);
+
+	echo $_COOKIE["admission_year"];
+
+	echo $admission_year;
+
+	print_r($ad);
+
+
+
+	
+?>

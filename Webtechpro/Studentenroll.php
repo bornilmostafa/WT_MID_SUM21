@@ -13,8 +13,11 @@
   
   require_once "Models/db_config.php";
   require_once "Controllers/studentControl.php";
-  $ad_date="";
-  $E_student=Enrollinfo($ad_date);
+
+
+
+
+  
 
   ?>
   
