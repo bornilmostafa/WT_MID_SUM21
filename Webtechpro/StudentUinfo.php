@@ -21,6 +21,20 @@
   ?>
   <input type="text" placeholder="Search...."  onkeyup="searchStudent(this)" >
   <div id= "suggesstion"></div>
+  <br>
+  <br>
+  <br>
+  <div> <h3> Search For Date   </h3> </div>
+
+  <input type="text" placeholder="search Dates by name...."  onkeyup="DateStudent(this)" >
+  <div id= "suggesstion2"></div>
+  <br>
+  <br>
+  <br>
+
+    <h1>  ALL STUDENT UPADATED INFORMATION     </h1>
+
+
   <?php
   
 		
@@ -39,6 +53,8 @@
       echo "<td>Nationality</td>"; 
       echo "<td>Image</td>"; 
       echo  "<td>Operations</td>";
+      echo  "<td>DATE OF STUDENT</td>";
+
       echo "</tr>";
       
       
@@ -57,8 +73,9 @@
                   echo "<td>".$c["graduationdate"]."</td>"; 
                   echo "<td>".$c["religion"]."</td>"; 
                   echo "<td>".$c["nationality"]."</td>"; 
-                  echo "<td>".$c["img"]."</td>";   
+                  echo "<td><img src='image/student/".$c["img"]."' width='100px' height='100px'></td>";   
                   echo '<td><a href="StudentUpdate.php?id= '.$c["id"].'">Update</a></td>';  
+                  echo '<td><a href="Practice.php?id= '.$c["id"].'">ALL DATES UPDATE</a></td>';  
                    echo "</tr>";
           
                           $i++;
@@ -73,7 +90,7 @@
                   
       
           ?>
-
+                   
    
 
           <br>
@@ -89,6 +106,8 @@
 </form>
 
 <script src="studentSearch.js"></script>
+
+<script src="DateSearch.js"></script>
 
 
     

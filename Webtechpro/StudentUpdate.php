@@ -3,6 +3,21 @@
      // $id = $_GET["id"];
      // echo $id;
       $c = StudentforUpdate($id);
+      $ad=StudentforUpdate($id);
+      
+
+      
+      $ad_date=explode(" ",$c["admissiondate"]);
+
+      $UAdating=$ad_date[0];
+      $UAMonth=$ad_date[1];
+      $UAyear=$ad_date[2];
+      echo $UAdating;
+      echo $UAMonth;
+      echo $UAyear;
+
+     
+
 
 
       ?>
@@ -148,8 +163,26 @@ if(get("nation").value == ""){
   <td><span>  </span></td>
 </tr>
 <tr>
-  <td>Blood Group :</td>
-  <td>: <input type="text" name="bloodgroup"  value="<?php echo $c["bloodgroup"];?>" ></td>
+  <td>Blood Group </td>
+   <!-- <input type="text" name="bloodgroup"  value="<?php echo $c["bloodgroup"];?>" -->
+  <td>: <select id="bloodgroup" name="bloodgroup">
+    <?php
+foreach($array2 as $k)
+{
+  if($c["bloodgroup"]==$k)
+  {
+echo "<option selected> $k </option>";}
+else
+{
+  echo "<option> $k </option>";
+
+}
+
+}
+?>
+
+
+</td>
 
   </tr>
 
@@ -157,7 +190,7 @@ if(get("nation").value == ""){
   <tr>
 
   <td>Date of Birth</td>
-  <td>: <input type="text" name="birthday"  value="<?php echo $c["birthday"];?>" ></td>
+  <td>: <input type="hidden" name="birthday"  value="<?php echo $c["birthday"];?>" ></td>
     </td>
 
     </tr>
@@ -168,21 +201,37 @@ if(get("nation").value == ""){
 
     <tr>
       <td>Religion :</td>
-      <td>: <input type="text" name="religion"  value="<?php echo $c["religion"];?>" ></td>
-    
+      <!-- <td>: <input type="text" name="religion"  value="<?php echo $c["religion"];?>" ></td> -->
+      <td>
+      : <select  id="religion" name="religion">
+        <?php
+    foreach($array3 as $l)
+    {
+      if($c["religion"]==$l)
+          {echo "<option selected> $l </option>";}
+          else{
+            echo "<option> $l </option>";
+          }
+    }
+    ?>
     </td>
       </tr>
    <tr>
       <td>Admission Date</td>
-  <td>: <input type="text" name="admissiondate"  value="<?php echo $c["admissiondate"];?>" ></td>
+      <td>: <input type="hidden" name="admissiondate"  value="<?php echo $c["admissiondate"];?>" ></td>
+
+ 
   </tr>
+
   <tr>
   <td>Graduation Date :</td>
-  <td>: <input type="text" name="graduationdate"  value="<?php echo $c["graduationdate"];?>" ></td>
+  <td>: <input type="hidden" name="graduationdate"  value="<?php echo $c["graduationdate"];?>" ></td>
   </tr>
+
       <tr>
         <td>Nationality</td>
-        <td>: <input type="radio" name="Nationality" value="Bangladeshi" <?php if($c["nationality"]=="Bangladeshi") echo "checked"; ?> name="Nationality"> Bangladeshi <input name="Nationality" <?php if($c["nationality"]=="Forigner") echo "checked"; ?> value="Forigner" type="radio"> Foriger </td>
+        <td>: <input type="radio" name="Nationality" value="Bangladeshi" <?php if($c["nationality"]=="Bangladeshi") echo "checked"; ?>> Bangladeshi 
+        <input name="Nationality" <?php if($c["nationality"]=="Forigner") echo "checked"; ?> value="Forigner" type="radio"> Foriger </td>
         <td><span> <?php echo $err_nation;?> </span></td>
       </tr>
 
@@ -218,9 +267,10 @@ if(get("nation").value == ""){
   </tr>
 <tr>
 <td>
-   <input type="file" name="image" id="image">
+   <input  type="file" name="image" id="image">
+
    </td>
-    <td><?php echo $c["img"];?></td>
+    <td><img src="image/student/<?php echo $c["img"];?>" width="100px" height="100px" ></td>
     
   </tr>
                                                 

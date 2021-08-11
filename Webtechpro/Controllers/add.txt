@@ -807,3 +807,28 @@ UPDATE student SET `userid`='',`name`='[value-3]',`email`='[value-4]',`gender`='
 
 	
 ?>
+
+
+
+//===================================  date , Month , year =================================
+
+ $birthdayArray = explode(" ",$birthday);
+            $dating = $birthdayarray[0];
+            $Month = $birthdayArray[1];
+            $year = $birthdayArray[2];
+
+
+            $admissiondateArray = $data[0]["admissiondate"];
+
+            $admissiondateArray = explode(" ",$admissiondate);
+            $Adating = $joiningdatearray[0];
+            $inputjmonth = $joiningdatearray[1];
+            $inputjyear = $joiningdatearray[2];
+            $leftdate = $data[0]["leftdate"];
+            $leftdatearray = explode(" ",$leftdate);
+
+
+            //=======================================================
+              $inputlday = $graduationdateArray[0];
+            $inputlmonth = $graduationdateArray[1];
+            $inputlyear = $graduationdateArray[2];

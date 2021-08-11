@@ -69,6 +69,9 @@ $err_mname="";
     $ad_date = $Adating." ".$AMonth." ".$Ayear;
     $gd_date = $Gdating." ".$GMonth." ".$Gyear;
 
+    //===================================================================
+    
+
 
 
 
@@ -585,6 +588,8 @@ htmlspecialchars($phone=$_POST["phone"]);
     $gd_date = $Gdating." ".$GMonth." ".$Gyear; */
 
 
+
+   
          // $id=$_GET["id"];
           $userid=$_POST["userid"];
      			$name=$_POST["name"];
@@ -604,7 +609,7 @@ htmlspecialchars($phone=$_POST["phone"]);
          // $filename=$_POST["image"];
           
 
-$rs = UpdateStudent($userid,$name,$email,$gender,$birthday,$nation,$blood,$religion,$fname,$mname,$ad_date,$gd_date,$address,$paddress,$phone,$filename);
+$rs = UpdateStudent($userid,$name,$email,$gender,$birthday,$nation,$religion,$blood,$fname,$mname,$ad_date,$gd_date,$address,$paddress,$phone,$filename);
 if($rs === true){
   header("Location: StudentUinfo.php");
 }
@@ -628,8 +633,8 @@ echo $err_db;
   if(isset($_POST["enroll_student"])){
 
 
-     $data=$_POST["admissiondate"];
-    $rs = Enrollment($data);
+    $query = "SELECT * FROM `student` WHERE admissiondate like '%$ad_date%'";
+    $rs = get($query);
 
 		if($rs === true){
 			header("Location:Montly.php");
@@ -640,15 +645,32 @@ echo $err_db;
 
   }
 
+//===========================================================Date Student====================
 
-         
-       
+if(isset($_POST["date_student"])){
 
-   
-        
-      
+  $birthday = $dating." ".$Month." ".$year;
+  $ad_date = $Adating." ".$AMonth." ".$Ayear;
+  $gd_date = $Gdating." ".$GMonth." ".$Gyear;
+
+
+  $birthday=$_POST["birthday"]=$_POST["date"]." ".$_POST["Month"]." ".$_POST["year"];
+
+  $ad_date=$_POST["admissiondate"]=$_POST["Adate"]." ".$_POST["AMonth"]." ".$_POST["Ayear"];
+
+  $gd_date=$_POST["graduationdate"]=$_POST["Gdate"]." ".$_POST["GMonth"]." ".$_POST["Gyear"];
+
+  $rs = UpdateDate($birthday,$ad_date,$gd_date);
+
+ if($rs === true){
+   header("Location:StudentUinfo.php");
+ }
  
+ $err_db = $rs;
 
+
+}       
+       
 
 
 //====================Student Search================================
@@ -766,12 +788,12 @@ $student_enrollment_month="";
     else if(isset($_POST["Student_enroll_month"])){
 			$student_enrollment_month=$_POST["Student_enroll_month"];
 		}
-		if(!$hasError){
+		if(!$hasError && isset($_POST["Student_enroll_year"])){
 			setcookie("admission_year",$student_enrollment_year,time()+3600);
       //setcookie("admission_year",$student_enrollment_month,time()+3600);
 			header("location:teacher_enrollment1.php");
 		}
-    if(!$hasError)
+    if(!$hasError && isset($_POST["Student_enroll_month"]))
     {
       setcookie("admission_month",$student_enrollment_month,time()+3600);
       header("location:student_enroll_2.php");
@@ -816,7 +838,18 @@ function Enrollment($data){
   
   }
 
- 
+ //============================Update Date s +++++++++++++++++++++++++++++++++++++++++++++++++
+
+ function updateDate($birthday,$ad_date,$gd_date){
+  global $id;
+  $query = "update student set birthday='$birthday', admissiondate='$ad_date' , graduationdate='$gd_date' where id='$id'";
+
+  return execute($query);
+
+
+ }
+  
+
 
 
  ?>
