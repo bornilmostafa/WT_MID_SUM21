@@ -69,7 +69,8 @@ $err_mname="";
     $ad_date = $Adating." ".$AMonth." ".$Ayear;
     $gd_date = $Gdating." ".$GMonth." ".$Gyear;
 
-    //===================================================================
+    //===================================================================File System=================
+    $old_file="";
     
 
 
@@ -410,14 +411,13 @@ $rs = insertStudent($userid,$name,$email,$gender,$birthday,$nation,$blood,$relig
 
 //================================================================Student Info Update============================================================
 
+
+
  if(isset($_POST["ed_student"])){
-
-
-
   ////========================================Student All info====================================
 
 //===================id================
-/* if(empty($_POST["id"])){
+ if(empty($_POST["id"])){
 $hasError = true;
 $err_userid="id Required";
 }
@@ -488,7 +488,7 @@ htmlentities($mname=$_POST["mname"]);
 
 
 //=====================Gender============================
-if(!empty($_POST["gender"])){
+if(!isset($_POST["gender"])){
 $hasError = true;
 $err_gender="Gender Required";
 }
@@ -497,7 +497,7 @@ htmlspecialchars($gender = $_POST["gender"]);
 }
 
 //======================Nationality======================
-if(empty($_POST["Nationality"])){
+if(!isset($_POST["Nationality"])){
 $hasError = true;
 $err_nation="Nationality Required";
 }
@@ -508,7 +508,7 @@ htmlspecialchars($nation = $_POST["Nationality"]);
 
 
 //=================blood========================
-if(empty($_POST["blood"])){
+if(!isset($_POST["blood"])){
 $hasError = true;
 $err_blood="blood Required";
 }
@@ -519,7 +519,7 @@ htmlspecialchars($blood = $_POST["blood"]);
 
 
 //=================Religion========================
-if(empty($_POST["religion"])){
+if(!isset($_POST["religion"])){
 $hasError = true;
 $err_religion="religion Required";
 }
@@ -539,9 +539,6 @@ else {
 
 htmlspecialchars($address=$_POST["address"]);
 }
-
-
-
 
 //====================parmanent address==================================
 
@@ -573,29 +570,18 @@ else {
 
 htmlspecialchars($phone=$_POST["phone"]);
 
-
 }
-
-
 
 //========================query submission--------------------------------------------
 
-
   if(!$hasError)
-  {
-    $birthday = $dating." ".$Month." ".$year;
-    $ad_date = $Adating." ".$AMonth." ".$Ayear;
-    $gd_date = $Gdating." ".$GMonth." ".$Gyear; */
-
-
-
-   
-         // $id=$_GET["id"];
+  {  
+          $id=$_GET["id"];
           $userid=$_POST["userid"];
      			$name=$_POST["name"];
           $email=$_POST["email"];
           $gender=$_POST["gender"];
-          $blood=$_POST["bloodgroup"];
+          $blood=$_POST["blood"];
           $birthday=$_POST["birthday"];
           $nation=$_POST["Nationality"];
           $fname=$_POST["fname"];
@@ -605,11 +591,9 @@ htmlspecialchars($phone=$_POST["phone"]);
           $gd_date=$_POST["graduationdate"];
           $address=$_POST["address"];
           $paddress=$_POST["Paddress"];
-          $phone=$_POST["phone"];
-         // $filename=$_POST["image"];
-          
+          $phone=$_POST["phone"];                 
 
-$rs = UpdateStudent($userid,$name,$email,$gender,$birthday,$nation,$religion,$blood,$fname,$mname,$ad_date,$gd_date,$address,$paddress,$phone,$filename);
+$rs = UpdateStudent($userid,$name,$email,$gender,$birthday,$nation,$religion,$blood,$fname,$mname,$ad_date,$gd_date,$address,$paddress,$phone);
 if($rs === true){
   header("Location: StudentUinfo.php");
 }
@@ -621,7 +605,7 @@ else{
 
 
  
-  //  } 
+  } 
 
 
  }
@@ -649,10 +633,81 @@ echo $err_db;
 
 if(isset($_POST["date_student"])){
 
+
+
+   //////////////////===============================Alll dates=======================================
+
+
+   if (!isset($_POST["date"])){
+    $hasError = true;
+    $err_dating="Date Required";
+  }
+  else{
+  htmlspecialchars($dating = $_POST["date"]);
+  }
+  if (!isset($_POST["Month"])){
+    $hasError = true;
+    $err_Month="Month Required";
+  }
+  else{
+  htmlspecialchars($Month = $_POST["Month"]);
+  }
+  if (!isset($_POST["year"])){
+    $hasError = true;
+  $err_year="year Required";
+  }
+  else{
+  htmlspecialchars ($year = $_POST["year"]);
+  }
+  ////===================Addmison=================
+  if (!isset($_POST["Adate"])){
+    $hasError = true;
+    $err_Adating="Date Required";
+  }
+  else{
+    $Adating = $_POST["Adate"];
+  }
+  if (!isset($_POST["AMonth"])){
+    $hasError = true;
+    $err_AMonth="Month Required";
+  }
+  else{
+    $AMonth = $_POST["AMonth"];
+  }
+  if (!isset($_POST["Ayear"])){
+    $hasError = true;
+    $err_Ayear="Year Required";
+  }
+  else{
+    $Ayear = $_POST["Ayear"];
+  }
+
+  ///=================Graduation-----------------------
+  if (!isset($_POST["Gdate"])){
+    $hasError = true;
+    $err_Gdating="Date Required";
+  }
+  else{
+    $Gdating = $_POST["Gdate"];
+  }
+  if (!isset($_POST["GMonth"])){
+    $hasError = true;
+    $err_GMonth="Month Required";
+  }
+  else{
+    $GMonth = $_POST["GMonth"];
+  }
+  if (!isset($_POST["Gyear"])){
+    $hasError = true;
+    $err_Gyear="year Required";
+  }
+  else{
+    $Gyear = $_POST["Gyear"];
+  }
+
   $birthday = $dating." ".$Month." ".$year;
   $ad_date = $Adating." ".$AMonth." ".$Ayear;
   $gd_date = $Gdating." ".$GMonth." ".$Gyear;
-
 
   $birthday=$_POST["birthday"]=$_POST["date"]." ".$_POST["Month"]." ".$_POST["year"];
 
@@ -670,6 +725,75 @@ if(isset($_POST["date_student"])){
 
 
 }       
+
+
+//=====================================IMGE UPDATED ============================
+
+
+if(isset($_POST["img_student"])){
+
+
+$userid=$_POST["userid"];
+$name=$_POST["name"];
+$old_file=$_POST["old_img"];
+$filename = $_FILES['image']['name'];
+$filesize =$_FILES['image']['size'];
+$filetmp =$_FILES['image']['tmp_name'];
+$ext = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
+$arr_ext = array("png","jpg","jpeg");
+
+if($filename != ' ')
+{
+  $filename=$_FILES['image']['name'];
+  move_uploaded_file($filetmp,"image/student/".$filename);
+  $rs = UpdateImage($userid,$name,$filename);
+
+  if($rs === true){
+    header("Location:StudentUinfo.php");
+  }
+
+  $err_db = $rs;
+ }
+ 
+
+}
+else
+{
+ $filename=$old_file;
+  
+}
+    /* if(empty($filename)){
+        $hasError = true;
+        $error_img = "Image required";
+    }
+    else if (!in_array($ext,$arr_ext)) {
+        $hasError = true;
+        $error_img = "Please choose only png, jpg or jpeg file";
+    }
+    else if($filesize > 524288){
+        $hasError = true;
+        $error_img = 'File size must be excately .5 MB or 512 KB';
+    }
+    */
+if(file_exists($filename)) {
+
+  move_uploaded_file($filetmp,"image/student/".$filename);
+  $rs = UpdateImage($userid,$name,$filename);
+
+ if($rs === true){
+   header("Location:StudentUinfo.php");
+ }
+
+
+ 
+ $err_db = $rs;
+}
+
+
+       
+
+
+
        
 
 
@@ -721,9 +845,9 @@ function getallStudent(){
 
 }
 
-function updateStudent($userid,$name,$email,$gender,$birthday,$nation,$religion,$blood,$fname,$mname,$ad_date,$gd_date,$address,$paddress,$phone,$filename){
+function updateStudent($userid,$name,$email,$gender,$birthday,$nation,$religion,$blood,$fname,$mname,$ad_date,$gd_date,$address,$paddress,$phone){
   global $id;
-  $query = "update student set userid='$userid', name='$name', email='$email', gender='$gender', birthday='$birthday', nationality='$nation', religion='$religion', bloodgroup='$blood', fathername='$fname', mothername='$mname', admissiondate='$ad_date',graduationdate='$gd_date',presentaddress='$address',parmanentaddress='$paddress',contactnumber='$phone', img='$filename' where id='$id' ";
+  $query = "update student set userid='$userid', name='$name', email='$email', gender='$gender', birthday='$birthday', nationality='$nation', religion='$religion', bloodgroup='$blood', fathername='$fname', mothername='$mname', admissiondate='$ad_date',graduationdate='$gd_date',presentaddress='$address',parmanentaddress='$paddress',contactnumber='$phone' where id='$id' ";
   return execute($query);
 }
 
@@ -763,6 +887,7 @@ function StudentforUpdate($id){
 //============================Student MMontly and yearly Information===============================
 $admission_year="";
 
+
 $student_enrollment_month="";
 	$student_enrollment_year="";
 	$error_student_enrollment_month_year="";
@@ -772,12 +897,13 @@ $student_enrollment_month="";
 		if(!isset($_POST["Student_enroll_month"]) && !isset($_POST["Student_enroll_year"])){
 			$hasError =true;
 			$error_student_enrollment_month_year="Only year or month year required";
-		}
-        /* else if(isset($_POST["Student_enroll_month"]) && !isset($_POST["Student_enroll_year"])){
-			$hasError=true;
-			$error_student_enrollment_month_year="month and year required";
-		}
-		 */
+    }
+		
+      //else if(isset($_POST["Student_enroll_month"]) && !isset($_POST["Student_enroll_year"])){
+			//$hasError=true;
+			//$error_student_enrollment_month_year="month and year required";
+		//}
+		 
     else if(isset($_POST["Student_enroll_month"]) || isset($_POST["Student_enroll_year"])){
 			$student_enrollment_month=$_POST["Student_enroll_month"];
 			$student_enrollment_year=$_POST["Student_enroll_year"];
@@ -788,12 +914,12 @@ $student_enrollment_month="";
     else if(isset($_POST["Student_enroll_month"])){
 			$student_enrollment_month=$_POST["Student_enroll_month"];
 		}
-		if(!$hasError && isset($_POST["Student_enroll_year"])){
+		if(!$hasError && isset($_POST["Student_enroll_year"]) && !isset($_POST["Student_enroll_month"])){
 			setcookie("admission_year",$student_enrollment_year,time()+3600);
       //setcookie("admission_year",$student_enrollment_month,time()+3600);
-			header("location:teacher_enrollment1.php");
+			header("location:Student_enrollment1.php");
 		}
-    if(!$hasError && isset($_POST["Student_enroll_month"]))
+    if(!$hasError && isset($_POST["Student_enroll_month"]) && !isset($_POST["Student_enroll_year"])  )
     {
       setcookie("admission_month",$student_enrollment_month,time()+3600);
       header("location:student_enroll_2.php");
@@ -848,6 +974,19 @@ function Enrollment($data){
 
 
  }
+
+ //=======================================Update Image ============================================================
+
+ function updateImage($userid,$name,$filename){
+  global $id;
+  $query = "update student set userid='$userid', name='$name' , img='$filename' where id='$id'";
+
+  return execute($query);
+
+
+ }
+
+
   
 
 

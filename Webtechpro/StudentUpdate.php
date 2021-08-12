@@ -56,25 +56,40 @@
 
         }
 
- if(get("fname").value == ""){
-		error = 1;
+
+
+
+        
+    if(get("fname").value == ""){
+		hasError = true;
 		get("err_fname").innerHTML = "* Father Name Required";
 	}
+	
+
 
 
   if(get("mname").value == ""){
-		error = 1;
+		hasError = true;
 		get("err_mname").innerHTML = "*Mother Name required ";
 	}
+	
 
         
 //=========================================blood ,ddate, ===================================
-
-        if(get("blood").value=="")
+      if(get("blood").selectedIndex == 0)
         {
           hasError = true;
           get("err_blood").innerHTML="*blood group required";
         }
+        
+        if(get("religion").selectedIndex == 0)
+        {
+          hasError = true;
+          get("err_religion").innerHTML="*Religion required";
+        }
+
+
+       
 
       //===============================gender validation===================================================
 
@@ -82,16 +97,6 @@
         hasError = true;
         get("err_gender").innerHTML = "*Gender Must be Required";
     }
-    function validategender(){
-        var gender = document.querySelector('input[name="gender"]:checked');
-        if(gender == null){
-            return false;
-        }
-        else{
-            return true;
-        }
-    }
-
     //==============================contact number ,  address ,image ==========================
 
     if(get("phone").value == ""){
@@ -112,15 +117,33 @@
         get("err_paddress").innerHTML = "*Present Address Must be Required";
     }
 
-if(get("nation").value == ""){
+if(!validateNation()){
         hasError = true;
         get("err_nation").innerHTML = "*Must be need nationality";
     }
   
-
-      return !hasError;
+    return !hasError;
 
      }
+
+
+     function validateNation(){
+        var na = document.querySelector('input[name="Nationality"]:checked');
+        if(na == null){
+            return false;
+        }
+           return true;
+    }
+
+    function validategender(){
+        var gn = document.querySelector('input[name="gender"]:checked');
+        if(gn == null){
+            return false;
+        }
+         return true;
+    }
+
+     
 
 
       function refresh()
@@ -136,7 +159,7 @@ if(get("nation").value == ""){
 <body>
           <h1>Student Update Page</h1>
 
-<form action="" onsubmit="" method="post" enctype="multipart/form-data" class="form-horizontal form-material">      
+<form action="" onsubmit="return vaildate()" method="post" enctype="multipart/form-data" class="form-horizontal form-material">      
  
 <table>
 
@@ -165,7 +188,7 @@ if(get("nation").value == ""){
 <tr>
   <td>Blood Group </td>
    <!-- <input type="text" name="bloodgroup"  value="<?php echo $c["bloodgroup"];?>" -->
-  <td>: <select id="bloodgroup" name="bloodgroup">
+  <td>: <select id="bloodgroup" name="blood">
     <?php
 foreach($array2 as $k)
 {
@@ -266,14 +289,14 @@ else
   <td> <span> <?php echo $err_phone;?> </span></td>
   </tr>
 <tr>
-<td>
+<!-- <td>
    <input  type="file" name="image" id="image">
 
    </td>
     <td><img src="image/student/<?php echo $c["img"];?>" width="100px" height="100px" ></td>
     
   </tr>
-                                                
+             -->                                    
 
 
   <tr>

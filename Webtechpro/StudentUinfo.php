@@ -54,6 +54,7 @@
       echo "<td>Image</td>"; 
       echo  "<td>Operations</td>";
       echo  "<td>DATE OF STUDENT</td>";
+      echo  "<td>UPDATE OF IMAGE</td>";
 
       echo "</tr>";
       
@@ -73,9 +74,10 @@
                   echo "<td>".$c["graduationdate"]."</td>"; 
                   echo "<td>".$c["religion"]."</td>"; 
                   echo "<td>".$c["nationality"]."</td>"; 
-                  echo "<td><img src='image/student/".$c["img"]."' width='100px' height='100px'></td>";   
+                  echo "<td><img src='image/student/".$c["img"]."' width='50px' height='50px'></td>";   
                   echo '<td><a href="StudentUpdate.php?id= '.$c["id"].'">Update</a></td>';  
                   echo '<td><a href="Practice.php?id= '.$c["id"].'">ALL DATES UPDATE</a></td>';  
+                  echo '<td><a href="ImageUpdate.php?id= '.$c["id"].'">FOR IMAGE UPDATE</a></td>';  
                    echo "</tr>";
           
                           $i++;
