@@ -832,3 +832,94 @@ UPDATE student SET `userid`='',`name`='[value-3]',`email`='[value-4]',`gender`='
               $inputlday = $graduationdateArray[0];
             $inputlmonth = $graduationdateArray[1];
             $inputlyear = $graduationdateArray[2];
+
+
+
+
+
+
+
+            //========================================================================================Course Registration Page=====================
+
+
+
+
+             <tr> 
+
+    <td>Select Your Fisrt Course</td>
+
+    <td>:
+
+<select id="course1" name="course1">
+    
+    <option disabled selected>---course---</option>
+      <?php
+    foreach($reg as $c)
+    {
+      
+        echo "<option value='".$c["c_id"]."'>".$c["coursename"]."</option>";
+       
+    }
+    ?>
+   </select>
+
+    </td>
+
+</tr>
+       
+<tr>
+      <td>Select Your Second Course</td>
+
+ <td>: 
+     <select  name="Course2" id="Course2" >
+     <option disabled selected>---course---</option>
+        <?php
+     foreach($reg as $c)
+     {
+        echo "<option value='".$c["c_id"]."'>".$c["coursename"]."</option>";
+    }   
+    ?> 
+      </select> 
+           
+  </td>
+
+  </tr>
+
+
+
+  <tr>
+  <td>Select your Third Course</td>
+
+  <td>: 
+<select id="course3" name="course3">
+<option disabled selected>-- Course---</option>
+    <?php
+  foreach($reg as $c)
+  {
+    echo "<option value='".$c["c_id"]."'>".$c["coursename"]."</option>";
+}   
+ 
+  ?>
+  </select>
+</td>
+
+</tr>
+
+
+
+<tr>
+  <td>Select your Fourth Course</td>
+  <td> :
+    <select id="course4" name="course4"> 
+        <option disabled selected>---course---</option>
+      <?php
+        foreach($reg as $c){
+
+         echo "<option value='".$c["c_id"]."'>".$c["coursename"]."</option>";
+        
+        }
+
+      ?>
+    </select>
+    
+    </td>
