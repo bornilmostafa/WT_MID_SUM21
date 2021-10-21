@@ -1,3 +1,60 @@
+<?php
+        require_once "Controllers/Student_password.php";  
+        
+      $pssC=authenticationfor_student_passwordchange($Opassword);
+?>
+
+
+<script>
+
+     var hasError=false;
+      function get(id)
+      {
+        return document.getElementById(id);
+      }
+     
+      function validate1()
+     {
+       refresh();
+
+//===============================================================================
+ if(get("Opassword").value=="")
+ {
+   hasError = true;
+   get("err_Opassword").innerHTML="*old password required";
+ }
+
+
+ if(get("Npassword").value=="")
+ {
+   hasError = true;
+   get("err_Npassword").innerHTML="*New password  required";
+ }
+ if(get("Cpassword").value=="")
+ {
+   hasError = true;
+   get("err_Cpassword").innerHTML="*Confirm your password";
+
+ }
+  
+ return !hasError;
+
+}
+
+
+      function refresh()
+      {
+        hasError=false;
+
+      get("err_Opassword").innerHTML="";
+      get("err_Npassword").innerHTML="";
+      get("err_Cpassword").innerHTML="";
+      }
+       
+
+</script>
+
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 
@@ -6,122 +63,38 @@
     <title>Password Change</title>
   </head>
   <body>
-<h1 align="middle" > <b>PASSWORD CHANGE</b> </h1>
+<h1 align="middle"><b>PASSWORD CHANGE</b> </h1>
 
-<?php
-   $Opassword="";
-   $err_Opassword="";
-
-   $Npassword="";
-   $err_Npassword="";
-
-   $Cpassword="";
-   $err_Cpassword="";
-
-   $hasError=false;
-
-   if(isset($_POST["submit"])){
-   if(empty($_POST["Opassword"])){
-  $hasError = true;
-  $err_password=" Old  Password Required";
-
-}
-else {
-      $Opassword=$_POST["Opassword"];
-}
-
-
- if(empty($_POST["Npassword"])){
-    $hasError = true;
-    $err_password="Password Required";
-  }
-  else if(strlen($_POST["Npassword"]) <= 7){
-    $hasError = true;
-    $err_Npassword="Password must contain at least 8 character";
-  }
-  else if(strpos($_POST["Npassword"], '#') == false || strpos($_POST["Npassword"], "?") == false){
-          $err_Npassword= "Password must contain at least 8 character,one # character and one ? character";
-  }
-  else{
-    $upper = 0;
-    $lower = 0;
-    $number = 0;
-    $arr = str_split($_POST["Npassword"]);
-    foreach($arr as $a){
-      if($a >= 'A' && $a <= 'Z')
-        $upper++;
-      else if($a >= 'a' && $a <= 'z')
-        $lower++;
-      else if ($a >= 0)
-        $number++;
-    }
-    if($upper >= 1 && $lower >= 1 && $number >= 1){
-      $Npassword = $_POST["Npassword"];
-    }
-    else{
-      $err_Npassword= "Password must contain at least 8 character, 1 special character(# or ?),1 number and combination of uppercase and lowercase alphabet";
-    }
-  }
-      if(empty($_POST["Cpassword"])){
-    $hasError = true;
-    $err_Cpassword="confirmpassword Required";
-  }
-      else if($_POST["Npassword"] !== $_POST["Cpassword"]){
-          $hasError = true;
-    $err_Cpassword="password and confirm password not match";
-      }
-      else{
-          $Cpassword=$_POST["Cpassword"];
-      }
-
-
- if(!$hasError){
-      echo " <h1> Form Submited</h1>";
-      echo $_POST["Opassword"]."<br>";
-      echo $_POST["Npassword"]."<br>";
-      echo $_POST["Cpassword"]."<br>";
-
-   }
-
-}
-   ?>
-
-   <form class="" action="" method="post">
+   <form class="" onsubmit="return validate1()" action="" method="post">
      <fieldset>
        <table>
          <tr>
            <td>Old Password</td>
-           	<td>: <input type="password" name="Opassword" value="<?php echo $Opassword;?>" placeholder="Your Old Password ...."> </td>
-            <td><?php echo $err_Opassword ?></td>
+           	<td>: <input type="text" id="Opassword" name="Opassword" value="<?php echo $Opassword;?>" placeholder="Your Old Password ...."> </td>
+            <td><span id="err_Opasswrod" ><?php echo $err_Opassword ?></span></td>
 
          </tr>
          <tr>
            <td>New Password</td>
-           	<td>: <input type="password" name="Npassword" value="<?php echo $Npassword;?>" placeholder="Your New Password ...."> </td>
-            <td><?php echo $err_Npassword ?></td>
+           	<td>: <input type="text" id="Npassword" Passw name="Npassword" value="<?php echo $Npassword;?>" placeholder="Your New Password ...."> </td>
+            <td><span id="err_Npassword" ><?php echo $err_Npassword ?></span></td>
 
          </tr>
          <tr>
            <td>Confirm New Password</td>
-             <td>: <input type="password" name="Cpassword" value="<?php echo $Cpassword;?>" placeholder="Your New Password ...."> </td>
-             <td> <td><?php echo $err_Cpassword ?></td>
+             <td>: <input type="text" id="Cpassword" name="Cpassword" value="<?php echo $Cpassword;?>" placeholder="Your New Password ...."> </td>
+             <td> <span id="err_Cpassword" ><?php echo $err_Cpassword?></span>
              </td>
 
          </tr>
 <tr>
-  <td><input type="submit" name="submit" value="submit"></td>
-</tr>
-<tr>
- <td>   <a href="Gradereport.php"> Grade Rreport Page </a></td>
-</tr>
-<tr>
-  <a href="Studentlogin.php"> Go To First Page </a>
+  <td><input type="submit" name="password_submit" value="submit"></td>
 </tr>
        </table>
      </fieldset>
 
    </form>
- <h2>  <b>Contact Admin</b>  </h2>
+ <h2>  <b>Contact Admin</b> </h2>
 
   </body>
 </html>

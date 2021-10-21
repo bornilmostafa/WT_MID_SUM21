@@ -299,7 +299,7 @@ var hasError=false;
 
   <tr>
   <td colspan="2" align="right"><button type="submit" name="date_student" value="submit">UPADETE STUDENT  ALL DATES </button>
-        <td colspan="2" align="right"><button type="reset" name="reset" value="Rest">  RESET   </button>
+   <td colspan="2" align="right"><button type="reset" name="reset" value="Rest">  RESET   </button>
 
 
   </tr>

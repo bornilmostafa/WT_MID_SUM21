@@ -217,15 +217,15 @@
 
         get("err_date").innerHTML="";
        get("err_Month").innerHTML="";
-       get("err_year").innerHTML="";
+      get("err_year").innerHTML="";
       get("err_Adate").innerHTML="";
-       get("err_AMonth").innerHTML="";
+      get("err_AMonth").innerHTML="";
       get("err_Ayear").innerHTML="";
       get("err_Gdate").innerHTML="";
-       get("err_GMonth").innerHTML="";
-       get("err_Gyear").innerHTML="";
-        get("err_fname").innerHTML="";
-         get("err_fname").innerHTML="";
+      get("err_GMonth").innerHTML="";
+      get("err_Gyear").innerHTML="";
+      get("err_fname").innerHTML="";
+       get("err_mname").innerHTML="";
 
         get("err_nation").innerHTML = "";
        get("err_paddress").innerHTML = "";

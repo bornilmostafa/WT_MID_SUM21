@@ -4,6 +4,7 @@
 
           $reg="";
            $reg=CourseDetail();
+           $sen=semesterDetails();
 
 
 

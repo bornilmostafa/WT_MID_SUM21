@@ -76,7 +76,7 @@ function regDetail()
     JOIN course S1 ON (S1.c_id = U.course1)
     JOIN course S2 ON (S2.c_id = U.course2)
     JOIN course S3 ON (S3.c_id = U.course3)
-     JOIN course S4 ON (S4.c_id = U.course4)";
+    JOIN course S4 ON (S4.c_id = U.course4)";
    
     $rs = get($query);
     return $rs;
@@ -97,6 +97,31 @@ function CourseDetail()
     $rs = get($query);
     return $rs;
   
+
+}
+
+//============================================
+
+function semesterDetails()
+{
+    $query = "select  * from course_semester";
+   
+    $rs = get($query);
+    return $rs;
+
+}
+
+//========================================================
+
+function KamHolo()
+
+{
+    $query = "select  * from course";
+   
+    $rs = get($query);
+    return $rs;
+  
+
 
 }
 

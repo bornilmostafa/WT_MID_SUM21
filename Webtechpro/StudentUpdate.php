@@ -2,8 +2,9 @@
       require_once "Controllers/studentControl.php";
      // $id = $_GET["id"];
      // echo $id;
-      $c = StudentforUpdate($id);
-      $ad=StudentforUpdate($id);
+
+    $c = StudentforUpdate($id);
+    $ad= StudentforUpdate($id);
       
 
       
@@ -16,11 +17,7 @@
       echo $UAMonth;
       echo $UAyear;
 
-     
-
-
-
-      ?>
+  ?>
 
 
 
@@ -33,6 +30,7 @@
 
     <script>
       var hasError=false;
+
       function get(id)
       {
         return document.getElementById(id);
@@ -52,7 +50,7 @@
         if(get("email").value=="")
         {
           hasError = true;
-          get("err_email").innerHTML="*email required";
+          get("err_email").innerHTML="*Email required";
 
         }
 
@@ -149,7 +147,20 @@ if(!validateNation()){
       function refresh()
       {
         hasError=false;
-      }
+ get("err_userid").innerHTML="";
+get("err_name").innerHTML="";
+get("err_email").innerHTML="";
+get("err_email").innerHTML="";
+get("err_blood").innerHTML="";
+get("err_religion").innerHTML="";
+get("err_gender").innerHTML="";
+get("err_fname").innerHTML="";
+get("err_mname").innerHTML="";
+get("err_nation").innerHTML = "";
+get("err_paddress").innerHTML = "";
+get("err_address").innerHTML = "";
+get("err_phone").innerHTML = ""; 
+ }
 
   </script>    
 
@@ -157,9 +168,9 @@ if(!validateNation()){
 
 </head>
 <body>
-          <h1>Student Update Page</h1>
+   <h1>Student Update Page</h1>
 
-<form action="" onsubmit="return vaildate()" method="post" enctype="multipart/form-data" class="form-horizontal form-material">      
+<form action="" onsubmit="return vaildate()" method="post" enctype="multipart/form-data">      
  
 <table>
 
@@ -175,8 +186,8 @@ if(!validateNation()){
   <td><span id="err_name"> <?php echo $err_name;?> </span></td>
   </tr>
   <td>Email</td>
-  <td>: <input type="text" name="email" value="<?php echo $c["email"];?>">  </td>
-  <td><span> <?php echo $err_email;?> </span></td>
+  <td>: <input type="text" id="email" name="email" value="<?php echo $c["email"];?>">  </td>
+  <td><span id="err_email" > <?php echo $err_email;?> </span></td>
 </tr>
 
 
@@ -212,8 +223,8 @@ else
 
   <tr>
 
-  <td>Date of Birth</td>
-  <td>: <input type="hidden" name="birthday"  value="<?php echo $c["birthday"];?>" ></td>
+  
+  <td> <input type="hidden" name="birthday"  value="<?php echo $c["birthday"];?>" ></td>
     </td>
 
     </tr>
@@ -240,15 +251,15 @@ else
     </td>
       </tr>
    <tr>
-      <td>Admission Date</td>
-      <td>: <input type="hidden" name="admissiondate"  value="<?php echo $c["admissiondate"];?>" ></td>
+     
+      <td><input type="hidden" name="admissiondate"  value="<?php echo $c["admissiondate"];?>" ></td>
 
  
   </tr>
 
   <tr>
-  <td>Graduation Date :</td>
-  <td>: <input type="hidden" name="graduationdate"  value="<?php echo $c["graduationdate"];?>" ></td>
+ 
+  <td><input type="hidden" name="graduationdate"  value="<?php echo $c["graduationdate"];?>" ></td>
   </tr>
 
       <tr>
@@ -260,33 +271,33 @@ else
 
       <tr>
         <td>Father's Name</td>
-        <td>: <input type="text" name="fname" value="<?php echo $c["fathername"];?>">  </td>
-        <td><span> <?php echo $err_fname;?> </span></td>
+        <td>: <input id="fname" type="text" name="fname" value="<?php echo $c["fathername"];?>">  </td>
+        <td><span id="err_fname" > <?php echo $err_fname;?> </span></td>
       </tr>
       <tr>
         <td>Mother's Name</td>
-        <td>: <input type="text" name="mname" value="<?php echo $c["mothername"];?>">  </td>
-        <td><span> <?php echo $err_mname;?> </span></td>
+        <td>: <input type="text" id="mname" name="mname" value="<?php echo $c["mothername"];?>">  </td>
+        <td><span id="err_mname" > <?php echo $err_mname;?> </span></td>
       </tr>
       
 
   <tr>
     <td>Present Address </td>
-    <td>: <input type="text" name="address" value="<?php echo $c["presentaddress"];?>"> </td>
-    <td><span> <?php echo $err_address;?> </span></td>
+    <td>: <input type="text" id="address" name="address" value="<?php echo $c["presentaddress"];?>"> </td>
+    <td><span id="err_address" > <?php echo $err_address;?> </span></td>
 
   </tr>
   <tr>
     <td>Parmanent Address </td>
-    <td>: <input type="text" name="Paddress" value="<?php echo $c["parmanentaddress"];?>"> </td>
-    <td><span> <?php echo $err_paddress;?> </span></td>
+    <td>: <input type="text" name="Paddress" id="paddress" value="<?php echo $c["parmanentaddress"];?>"> </td>
+    <td><span id="err_paddress" > <?php echo $err_paddress;?> </span></td>
 
   </tr>
 
   <tr>
   <td>Contact Number </td>
-  <td> : <input type="text" name="phone" value="<?php echo $c["contactnumber"];?>"> </td>
-  <td> <span> <?php echo $err_phone;?> </span></td>
+  <td> : <input type="text" id="phone" name="phone" value="<?php echo $c["contactnumber"];?>"> </td>
+  <td> <span id="phone" > <?php echo $err_phone;?> </span></td>
   </tr>
 <tr>
 <!-- <td>
